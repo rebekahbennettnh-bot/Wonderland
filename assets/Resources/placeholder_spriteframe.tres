@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://chw31glc3jty3"]
+
+[ext_resource type="Texture2D" uid="uid://dcn7lkgkmrunt" path="res://assets/Placeholders/Game PlayerRobe Placeholder.png" id="1_tybj8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abqhh"]
+atlas = ExtResource("1_tybj8")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv78h"]
+atlas = ExtResource("1_tybj8")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n8xq"]
+atlas = ExtResource("1_tybj8")
+region = Rect2(64, 0, 32, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abqhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv78h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7n8xq")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 3.0
+}]

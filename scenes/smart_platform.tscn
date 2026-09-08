@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d144yvmnsqsio"]
+
+[ext_resource type="Script" uid="uid://c80jcvaodn5pv" path="res://scripts/smart_platform.gd" id="1_tsakv"]
+[ext_resource type="Texture2D" uid="uid://d2m882b7k6xmo" path="res://assets/brackeys_platformer_assets/sprites/platforms.png" id="2_e4m7l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjaea"]
+atlas = ExtResource("2_e4m7l")
+region = Rect2(16, 0, 32, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apxx0"]
+size = Vector2(32, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaea"]
+size = Vector2(30, 7)
+
+[node name="Smart Platform" type="AnimatableBody2D" unique_id=1808442509]
+script = ExtResource("1_tsakv")
+speed = 16.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=949247872]
+position = Vector2(0, 0.5)
+texture = SubResource("AtlasTexture_hjaea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=971911350]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_apxx0")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1603050112]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1028509056]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hjaea")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

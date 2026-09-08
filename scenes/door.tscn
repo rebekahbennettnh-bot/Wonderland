@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bbmixkr6udf3m"]
+
+[ext_resource type="Texture2D" uid="uid://b0dn4xiispady" path="res://assets/Placeholders/Game Door Placeholder.png" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://ba034qyol0oap" path="res://scripts/door.gd" id="1_uvdjg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjaea"]
+atlas = ExtResource("1_hpvv5")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apxx0"]
+size = Vector2(16, 32)
+
+[node name="Door" type="AnimatableBody2D" unique_id=1551555883]
+collision_layer = 64
+script = ExtResource("1_uvdjg")
+logic_channel = null
+inverted = null
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=154299704]
+texture = SubResource("AtlasTexture_hjaea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1219656132]
+shape = SubResource("RectangleShape2D_apxx0")

@@ -1,0 +1,340 @@
+[gd_scene format=3 uid="uid://x8r2k3a3th56"]
+
+[ext_resource type="Script" uid="uid://dio3u1o4ph8uw" path="res://scripts/title_screen.gd" id="1_fgkus"]
+[ext_resource type="Texture2D" uid="uid://crxje3d2oivb5" path="res://assets/Other/button9slice.png" id="2_cs5ya"]
+[ext_resource type="Texture2D" uid="uid://kcfjik0kegne" path="res://icon.svg" id="2_mgrm8"]
+[ext_resource type="Texture2D" uid="uid://bbt250k72fdeq" path="res://assets/brackeys_platformer_assets/sprites/world_tileset.png" id="3_dc4i4"]
+[ext_resource type="Texture2D" uid="uid://bwf4idyace7ja" path="res://assets/Title Screen/wpi_logo.png" id="4_e54dn"]
+[ext_resource type="Texture2D" uid="uid://coliw0ga378kn" path="res://assets/Title Screen/Text Nineslice.png" id="5_dc4i4"]
+[ext_resource type="FontFile" uid="uid://bduq5uplrcxrl" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="6_e54dn"]
+[ext_resource type="AudioStream" uid="uid://0xnjtu6sg26t" path="res://assets/brackeys_platformer_assets/sounds/tap.wav" id="7_3yumr"]
+[ext_resource type="AudioStream" uid="uid://ch5dnglr8qhsj" path="res://assets/Other/skyscraper_seven-click-buttons-ui-menu-sounds-effects-button-7-203601.mp3" id="9_mykxm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgrm8"]
+atlas = ExtResource("3_dc4i4")
+region = Rect2(0, 208, 16, 16)
+
+[node name="Title Screen" type="Node2D" unique_id=1516397124 node_paths=PackedStringArray("alphabg", "cancel_button", "wpi_splash", "credits", "version", "cancel_button_sound", "open_button_sound")]
+script = ExtResource("1_fgkus")
+alphabg = NodePath("AlphaBackground")
+cancel_button = NodePath("Cancel Button")
+wpi_splash = NodePath("WPI Splash")
+credits = NodePath("Credits Scrollbar")
+version = NodePath("Version Scrollbar")
+cancel_button_sound = NodePath("Cancel Button Sound")
+open_button_sound = NodePath("Open Button Sound")
+
+[node name="MenuButtonContainer" type="VBoxContainer" parent="." unique_id=1117851989]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -58.5
+offset_right = 58.5
+offset_bottom = 101.0
+grow_horizontal = 2
+
+[node name="Play Button" type="Button" parent="MenuButtonContainer" unique_id=857255419]
+layout_mode = 2
+text = "Start Game"
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MenuButtonContainer/Play Button" unique_id=1891947437]
+z_index = -1
+layout_mode = 0
+offset_right = 117.0
+offset_bottom = 31.0
+texture = ExtResource("2_cs5ya")
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 10
+patch_margin_bottom = 12
+
+[node name="Credits Button" type="Button" parent="MenuButtonContainer" unique_id=1002130667]
+layout_mode = 2
+text = "Credits"
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MenuButtonContainer/Credits Button" unique_id=2116017997]
+z_index = -1
+layout_mode = 0
+offset_right = 117.0
+offset_bottom = 31.0
+texture = ExtResource("2_cs5ya")
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 10
+patch_margin_bottom = 12
+
+[node name="Version Button" type="Button" parent="MenuButtonContainer" unique_id=1476286560]
+layout_mode = 2
+text = "Version Notes"
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MenuButtonContainer/Version Button" unique_id=1287235786]
+z_index = -1
+layout_mode = 0
+offset_right = 117.0
+offset_bottom = 31.0
+texture = ExtResource("2_cs5ya")
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 10
+patch_margin_bottom = 12
+
+[node name="Test Plane" type="Button" parent="MenuButtonContainer" unique_id=1366133655]
+modulate = Color(1, 1, 1, 0.09803922)
+layout_mode = 2
+text = "Test Plane"
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MenuButtonContainer/Test Plane" unique_id=221508221]
+z_index = -1
+layout_mode = 0
+offset_right = 117.0
+offset_bottom = 31.0
+texture = ExtResource("2_cs5ya")
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 10
+patch_margin_bottom = 12
+
+[node name="Titlecard" type="Sprite2D" parent="." unique_id=1992908101]
+z_index = -1
+position = Vector2(0, -69)
+scale = Vector2(1.5, 0.75)
+texture = ExtResource("2_mgrm8")
+
+[node name="Title" type="Label" parent="Titlecard" unique_id=1448107232]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -94.0
+offset_top = -49.333332
+offset_right = 1.0
+offset_bottom = -26.333332
+grow_horizontal = 2
+scale = Vector2(0.667, 1.333)
+text = "Wanderland"
+
+[node name="Subtitle" type="Label" parent="Titlecard" unique_id=1902945961]
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.666664
+offset_top = -94.66667
+offset_right = 59.333336
+offset_bottom = -71.66667
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.667, 1.333)
+theme_override_font_sizes/font_size = 12
+text = "Placeholder Titlecard"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Titlecard" unique_id=119815232]
+custom_minimum_size = Vector2(128, 128)
+custom_maximum_size = Vector2(128, 128)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("5_dc4i4")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="Backdrop" type="Sprite2D" parent="." unique_id=1174568094]
+z_index = -10
+position = Vector2(6.4373016e-06, -3.5762787e-07)
+scale = Vector2(30.000002, 16.875)
+texture = SubResource("AtlasTexture_mgrm8")
+
+[node name="WPI Splash" type="Sprite2D" parent="." unique_id=1973019035]
+visible = false
+z_index = 2
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("4_e54dn")
+region_rect = Rect2(0, 0, 2415, 1759.5311)
+
+[node name="Menu Camera" type="Camera2D" parent="." unique_id=276347794]
+zoom = Vector2(4, 4)
+
+[node name="Credits Scrollbar" type="ScrollContainer" parent="." unique_id=819629469]
+visible = false
+z_index = 5
+custom_minimum_size = Vector2(256, 192)
+custom_maximum_size = Vector2(256, 192)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -96.0
+offset_right = 128.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+scroll_hint_mode = 3
+
+[node name="Credits Text" type="Label" parent="Credits Scrollbar" unique_id=1139637928]
+custom_minimum_size = Vector2(248, 0)
+custom_maximum_size = Vector2(248, -1)
+layout_mode = 2
+text = "This is placeholder credits scroll text
+
+Programming Lead:
+Evan
+
+Writing/Design Lead:
+Ari
+
+Art Lead:
+Audrey
+
+Audio Lead:
+Rebekah
+
+Other Credits:
+Additional credits will probably go here once there are some"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Credits Scrollbar/Credits Text" unique_id=121454518]
+z_index = -1
+custom_minimum_size = Vector2(256, 192)
+custom_maximum_size = Vector2(256, 192)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 192.0
+texture = ExtResource("5_dc4i4")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="Version Scrollbar" type="ScrollContainer" parent="." unique_id=81805090]
+visible = false
+z_index = 5
+custom_minimum_size = Vector2(256, 192)
+custom_maximum_size = Vector2(256, 192)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -96.0
+offset_right = 128.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+scroll_hint_mode = 3
+
+[node name="Version Text" type="Label" parent="Version Scrollbar" unique_id=674897346]
+custom_minimum_size = Vector2(248, 0)
+custom_maximum_size = Vector2(248, -1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(8, 0)
+text = "This is version notes placeholder text
+It needs to be multiple lines
+so that I can ensure
+it can scroll properly
+
+Version 1.1:
+Sprint 1
+Features:
+Added a title screen
+Added buttons
+Added credits/version notes
+Added WPI Splash
+Added dash (shift)
+Added walljump and double jump
+Fixes:
+None
+
+Version 1.0:
+Godot Tutorial Game
+Features:
+Followed Brackey's platformer tutorial
+Added platforms that auto-detect walls
+Fixes:
+Stopped slimes from flying off cliffs
+"
+autowrap_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Version Scrollbar/Version Text" unique_id=60768325]
+z_index = -1
+custom_minimum_size = Vector2(256, 192)
+custom_maximum_size = Vector2(256, 192)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 192.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-8, 0)
+texture = ExtResource("5_dc4i4")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="AlphaBackground" type="ColorRect" parent="." unique_id=2061630883]
+visible = false
+custom_minimum_size = Vector2(480, 270)
+custom_maximum_size = Vector2(480, 270)
+offset_left = -240.0
+offset_top = -135.0
+offset_right = 240.0
+offset_bottom = 135.0
+mouse_filter = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.7490196)
+
+[node name="Cancel Button" type="Button" parent="." unique_id=1964413409]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+custom_maximum_size = Vector2(32, 32)
+offset_left = 128.0
+offset_top = -96.0
+offset_right = 160.0
+offset_bottom = -64.0
+theme_override_fonts/font = ExtResource("6_e54dn")
+text = "X"
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Cancel Button" unique_id=670212746]
+z_index = -1
+custom_minimum_size = Vector2(32, 32)
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -1)
+texture = ExtResource("5_dc4i4")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="Cancel Button Sound" type="AudioStreamPlayer" parent="." unique_id=790631443]
+stream = ExtResource("7_3yumr")
+
+[node name="Open Button Sound" type="AudioStreamPlayer" parent="." unique_id=17135542]
+stream = ExtResource("9_mykxm")
+
+[connection signal="pressed" from="MenuButtonContainer/Play Button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuButtonContainer/Credits Button" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MenuButtonContainer/Version Button" to="." method="_on_version_button_pressed"]
+[connection signal="pressed" from="MenuButtonContainer/Test Plane" to="." method="_on_test_button_pressed"]
+[connection signal="pressed" from="Cancel Button" to="." method="_on_cancel_button_pressed"]
