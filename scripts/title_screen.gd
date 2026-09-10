@@ -7,11 +7,13 @@ extends Node2D
 @export var version : ScrollContainer
 @export var cancel_button_sound : AudioStreamPlayer
 @export var open_button_sound : AudioStreamPlayer
+@export var menu_music : AudioStreamPlayer
 var popup_selected : int
 enum POPUPS {NONE, CREDITS, VERSION}
 
 
 func _ready() -> void:
+	menu_music.play()
 	wpi_splash.visible = true
 	alphabg.visible = true
 	alphabg.color.a = 1.0
@@ -37,7 +39,7 @@ func splash_fadeout() -> void:
 
 func _on_play_button_pressed() -> void:
 	open_button_sound.play()
-	var game = preload("res://scenes/game.tscn").instantiate()
+	var game = preload("res://scenes/test_plane.tscn").instantiate()
 	get_parent().add_child(game)
 	queue_free()
 

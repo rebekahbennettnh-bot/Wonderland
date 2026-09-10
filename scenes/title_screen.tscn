@@ -9,12 +9,13 @@
 [ext_resource type="FontFile" uid="uid://bduq5uplrcxrl" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="6_e54dn"]
 [ext_resource type="AudioStream" uid="uid://0xnjtu6sg26t" path="res://assets/brackeys_platformer_assets/sounds/tap.wav" id="7_3yumr"]
 [ext_resource type="AudioStream" uid="uid://ch5dnglr8qhsj" path="res://assets/Other/skyscraper_seven-click-buttons-ui-menu-sounds-effects-button-7-203601.mp3" id="9_mykxm"]
+[ext_resource type="AudioStream" uid="uid://b1qp31mjqnl1p" path="res://assets/Other/bennett_rebekah.wav" id="10_tklts"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgrm8"]
 atlas = ExtResource("3_dc4i4")
 region = Rect2(0, 208, 16, 16)
 
-[node name="Title Screen" type="Node2D" unique_id=1516397124 node_paths=PackedStringArray("alphabg", "cancel_button", "wpi_splash", "credits", "version", "cancel_button_sound", "open_button_sound")]
+[node name="Title Screen" type="Node2D" unique_id=1516397124 node_paths=PackedStringArray("alphabg", "cancel_button", "wpi_splash", "credits", "version", "cancel_button_sound", "open_button_sound", "menu_music")]
 script = ExtResource("1_fgkus")
 alphabg = NodePath("AlphaBackground")
 cancel_button = NodePath("Cancel Button")
@@ -23,6 +24,7 @@ credits = NodePath("Credits Scrollbar")
 version = NodePath("Version Scrollbar")
 cancel_button_sound = NodePath("Cancel Button Sound")
 open_button_sound = NodePath("Open Button Sound")
+menu_music = NodePath("MenuMusic")
 
 [node name="MenuButtonContainer" type="VBoxContainer" parent="." unique_id=1117851989]
 anchors_preset = 5
@@ -82,6 +84,7 @@ patch_margin_right = 10
 patch_margin_bottom = 12
 
 [node name="Test Plane" type="Button" parent="MenuButtonContainer" unique_id=1366133655]
+visible = false
 modulate = Color(1, 1, 1, 0.09803922)
 layout_mode = 2
 text = "Test Plane"
@@ -115,7 +118,7 @@ offset_right = 1.0
 offset_bottom = -26.333332
 grow_horizontal = 2
 scale = Vector2(0.667, 1.333)
-text = "Wanderland"
+text = "Wonderland"
 
 [node name="Subtitle" type="Label" parent="Titlecard" unique_id=1902945961]
 z_index = 1
@@ -247,10 +250,18 @@ custom_maximum_size = Vector2(248, -1)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(8, 0)
-text = "This is version notes placeholder text
-It needs to be multiple lines
-so that I can ensure
-it can scroll properly
+text = "Version 1.2:
+Sprint 2
+Features:
+The map is now the test map, containing such additions as-
+Powerups (enables double jump, wall jump, and dash(shift))
+NPCs (e to interact)
+Other additions:
+Title screen music
+A real sprite for the player
+Coyote time to make platforming less frustrating
+Fixes:
+None
 
 Version 1.1:
 Sprint 1
@@ -332,6 +343,9 @@ stream = ExtResource("7_3yumr")
 
 [node name="Open Button Sound" type="AudioStreamPlayer" parent="." unique_id=17135542]
 stream = ExtResource("9_mykxm")
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=407759361]
+stream = ExtResource("10_tklts")
 
 [connection signal="pressed" from="MenuButtonContainer/Play Button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuButtonContainer/Credits Button" to="." method="_on_credits_button_pressed"]

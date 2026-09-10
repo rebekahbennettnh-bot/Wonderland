@@ -16,15 +16,10 @@ random_volume_offset_db = 5.0
 streams_count = 1
 stream_0/stream = ExtResource("3_rv78h")
 
-[node name="NPC" type="Node2D" unique_id=73506552 node_paths=PackedStringArray("audio_player", "sprite", "portrait", "textbox_ui", "text_field")]
+[node name="NPC" type="Node2D" unique_id=73506552]
 script = ExtResource("1_abqhh")
-audio_player = NodePath("AudioStreamPlayer2D")
-sprite = NodePath("AnimatedSprite2D")
-portrait = NodePath("CanvasLayer/NinePatchRect2/Portrait")
-textbox_ui = NodePath("CanvasLayer")
-text_field = NodePath("CanvasLayer/NinePatchRect/Label")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=37324247]
+[node name="NPCSprite" type="AnimatedSprite2D" parent="." unique_id=37324247]
 sprite_frames = ExtResource("2_rv78h")
 animation = &"idle"
 autoplay = "idle"
@@ -36,15 +31,38 @@ collision_layer = 256
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_apxx0")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=825602736]
+[node name="TalkSound" type="AudioStreamPlayer2D" parent="." unique_id=825602736]
 stream = SubResource("AudioStreamRandomizer_hjaea")
 autoplay = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1709425947]
+[node name="TextboxUI" type="CanvasLayer" parent="." unique_id=1709425947]
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="CanvasLayer" unique_id=805596597]
+[node name="Name" type="Label" parent="TextboxUI" unique_id=957106734]
+custom_minimum_size = Vector2(1, 8)
+custom_maximum_size = Vector2(360, 8)
+offset_left = 240.0
+offset_top = 246.0
+offset_right = 329.0
+offset_bottom = 254.0
+theme_override_fonts/font = ExtResource("6_tl2vt")
+theme_override_font_sizes/font_size = 8
+text = "Centered Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="TextboxUI/Name" unique_id=1605154257]
+visible = false
+z_index = -1
+layout_mode = 0
+offset_left = 37.25
+offset_top = 15.25
+offset_right = 81.5
+offset_bottom = 83.5
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="TextboxUI" unique_id=805596597]
 custom_minimum_size = Vector2(48, 48)
 offset_left = 56.0
 offset_top = 198.0
@@ -56,13 +74,13 @@ patch_margin_top = 15
 patch_margin_right = 15
 patch_margin_bottom = 15
 
-[node name="Portrait" type="AnimatedSprite2D" parent="CanvasLayer/NinePatchRect2" unique_id=1848033603]
+[node name="PortraitSprite" type="AnimatedSprite2D" parent="TextboxUI/NinePatchRect2" unique_id=1848033603]
 position = Vector2(24, 24)
 sprite_frames = ExtResource("4_4wlns")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=948548058]
+[node name="NinePatchRect" type="NinePatchRect" parent="TextboxUI" unique_id=948548058]
 custom_minimum_size = Vector2(320, 48)
 offset_left = 104.0
 offset_top = 198.0
@@ -74,7 +92,7 @@ patch_margin_top = 15
 patch_margin_right = 15
 patch_margin_bottom = 15
 
-[node name="Label" type="Label" parent="CanvasLayer/NinePatchRect" unique_id=419406453]
+[node name="TextField" type="Label" parent="TextboxUI/NinePatchRect" unique_id=419406453]
 custom_minimum_size = Vector2(304, 32)
 layout_mode = 1
 offset_right = 40.0

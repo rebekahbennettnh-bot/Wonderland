@@ -1,15 +1,17 @@
 extends Node2D
 class_name NPC
 
-@export var audio_player : AudioStreamPlayer2D
-@export var sprite : AnimatedSprite2D
-@export var portrait : AnimatedSprite2D
+@onready var audio_player : AudioStreamPlayer2D =$TalkSound
+@onready var sprite : AnimatedSprite2D = $NPCSprite
+@onready var portrait : AnimatedSprite2D = $TextboxUI/NinePatchRect2/PortraitSprite
 @export var character : CHARACTERS
 @export var flip_direction : bool
-@export var textbox_ui : CanvasLayer
-@export var text_field : Label
+@onready var textbox_ui : CanvasLayer = $TextboxUI
+@onready var text_field : Label = $TextboxUI/NinePatchRect/TextField
+@onready var nametag : Label = $TextboxUI/Name
 var player_intersecting : bool
 var dialogue_state : int = 0
+var portrait_visible : bool
 enum CHARACTERS {SILPH, GELI}
 
 func _ready() -> void:
@@ -17,10 +19,17 @@ func _ready() -> void:
 	if character == CHARACTERS.SILPH:
 		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
 		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
+		nametag.text = "Silph"
+		portrait_visible = false
 	elif character == CHARACTERS.GELI:
 		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
 		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
+		nametag.text = "Geli"
+		portrait_visible = true
 	sprite.flip_h = flip_direction
+	nametag.position = Vector2(240 - (nametag.size.x / 2), 246)
+	if portrait_visible:
+		nametag.position += Vector2(24, 0)
 	sprite.play("idle")
 	return
 
