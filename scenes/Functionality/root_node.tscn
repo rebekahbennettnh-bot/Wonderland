@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dptps0hn1fxmc"]
+
+[ext_resource type="Script" uid="uid://c37sp6tch8b0w" path="res://scripts/root_node.gd" id="1_ynfbw"]
+[ext_resource type="AudioStream" uid="uid://js3e1ak5cxvr" path="res://assets/Original/tutorial level.wav" id="2_d22p1"]
+
+[node name="Root Node" type="Node2D" unique_id=803388301]
+script = ExtResource("1_ynfbw")
+
+[node name="TutorialMusic" type="AudioStreamPlayer" parent="." unique_id=1470166876]
+stream = ExtResource("2_d22p1")

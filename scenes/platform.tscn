@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://72yv8q1ev8h5"]
 
-[ext_resource type="Texture2D" uid="uid://d2m882b7k6xmo" path="res://assets/brackeys_platformer_assets/sprites/platforms.png" id="1_ba0x2"]
+[ext_resource type="Texture2D" uid="uid://dgpgoftsyhbat" path="res://assets/Placeholders/PlatformGrass Placeholder.png" id="1_ba0x2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8edl"]
 atlas = ExtResource("1_ba0x2")
-region = Rect2(16, 0, 32, 9)
+region = Rect2(0, 0, 32, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaea"]
 size = Vector2(32, 9)
@@ -13,7 +13,7 @@ size = Vector2(32, 9)
 collision_layer = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1070340184]
-position = Vector2(0, 0.5)
+position = Vector2(0, 3)
 texture = SubResource("AtlasTexture_q8edl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=797953031]

@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bcwh3720ubtoh"]
+
+[ext_resource type="Texture2D" uid="uid://topqrc5tjxnf" path="res://assets/Original/rabbitcharacterresize.png" id="1_7ipmr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbu2k"]
+atlas = ExtResource("1_7ipmr")
+region = Rect2(20, 28, 10, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc3s6"]
+atlas = ExtResource("1_7ipmr")
+region = Rect2(30, 28, 10, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih351"]
+atlas = ExtResource("1_7ipmr")
+region = Rect2(0, 56, 10, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nj36"]
+atlas = ExtResource("1_7ipmr")
+region = Rect2(10, 56, 10, 18)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbu2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc3s6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih351")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nj36")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 3.0
+}]

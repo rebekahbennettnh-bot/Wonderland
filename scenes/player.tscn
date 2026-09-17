@@ -1,50 +1,70 @@
 [gd_scene format=3 uid="uid://descwi42mw2qf"]
 
 [ext_resource type="Script" uid="uid://10iqhbb8eeuf" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://caislqnhsx3dc" path="res://assets/Other/rabbitcharacter.png" id="2_qhqgy"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(64, 32, 32, 32)
+[ext_resource type="Texture2D" uid="uid://topqrc5tjxnf" path="res://assets/Original/rabbitcharacterresize.png" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://coliw0ga378kn" path="res://assets/Title Screen/Text Nineslice.png" id="3_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://bgdavd3c5xogg" path="res://assets/Placeholders/Wonderland Ability Icons Placeholder.png" id="4_fjrip"]
+[ext_resource type="FontFile" uid="uid://bduq5uplrcxrl" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="6_ur7pv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(96, 32, 32, 32)
+atlas = ExtResource("2_g2els")
+region = Rect2(20, 28, 10, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(0, 64, 32, 32)
+atlas = ExtResource("2_g2els")
+region = Rect2(30, 28, 10, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(32, 64, 32, 32)
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 56, 10, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(96, 64, 32, 32)
+atlas = ExtResource("2_g2els")
+region = Rect2(10, 56, 10, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(32, 0, 32, 32)
+atlas = ExtResource("2_g2els")
+region = Rect2(30, 56, 10, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(64, 0, 32, 32)
+atlas = ExtResource("2_g2els")
+region = Rect2(10, 0, 10, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(96, 0, 32, 32)
+atlas = ExtResource("2_g2els")
+region = Rect2(20, 0, 10, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(0, 32, 32, 32)
+atlas = ExtResource("2_g2els")
+region = Rect2(30, 0, 10, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 28, 10, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
+atlas = ExtResource("2_g2els")
+region = Rect2(30, 56, 10, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 84, 10, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
+atlas = ExtResource("2_g2els")
+region = Rect2(10, 84, 10, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
+atlas = ExtResource("2_g2els")
+region = Rect2(20, 84, 10, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
+atlas = ExtResource("2_g2els")
+region = Rect2(30, 84, 10, 28)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hjaea"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g2els")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qhqgy")
 }, {
@@ -53,6 +73,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
 }],
 "loop": 1,
 "name": &"idle",
@@ -60,16 +83,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tuyoq")
+"texture": SubResource("AtlasTexture_fjrip")
 }],
 "loop": 1,
 "name": &"jump",
-"speed": 2.0
+"speed": 1.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fjrip")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_smehm")
 }, {
@@ -78,18 +98,57 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
 }],
 "loop": 1,
 "name": &"run",
-"speed": 5.0
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ej7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oprun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8ls1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfm1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fulsm")
+}],
+"loop": 0,
+"name": &"start_jump",
+"speed": 16.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tklts"]
 radius = 3.0
 height = 22.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_apxx0"]
+atlas = ExtResource("4_fjrip")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjaea"]
+atlas = ExtResource("4_fjrip")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("4_fjrip")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+atlas = ExtResource("4_fjrip")
+region = Rect2(0, 16, 16, 16)
+
 [node name="Player" type="CharacterBody2D" unique_id=1988823864]
-collision_mask = 47
+collision_mask = 495
 script = ExtResource("1_g2els")
 wall_jump_enabled = false
 double_jump_enabled = false
@@ -97,11 +156,10 @@ dash_enabled = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=943286037]
 z_index = 5
-position = Vector2(3, -12)
+position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_hjaea")
-animation = &"idle"
+animation = &"jump"
 autoplay = "idle"
-frame_progress = 0.25227293
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=761539957]
 position = Vector2(0, -11)
@@ -116,3 +174,125 @@ collision_mask = 2
 position = Vector2(0, -5)
 target_position = Vector2(6, 0)
 collision_mask = 2
+
+[node name="AbilitiesUI" type="CanvasLayer" parent="." unique_id=2097764555]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="AbilitiesRect" type="NinePatchRect" parent="AbilitiesUI" unique_id=624248485]
+custom_minimum_size = Vector2(96, 32)
+custom_maximum_size = Vector2(96, 32)
+offset_left = 192.0
+offset_top = 24.0
+offset_right = 288.0
+offset_bottom = 56.0
+texture = ExtResource("3_tuyoq")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AbilitiesUI/AbilitiesRect" unique_id=1610738752]
+custom_minimum_size = Vector2(72, 16)
+custom_maximum_size = Vector2(72, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="DoubleJumpIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer" unique_id=1447269535]
+custom_minimum_size = Vector2(16, 16)
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_apxx0")
+
+[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/DoubleJumpIcon" unique_id=943278988]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("AtlasTexture_hjaea")
+
+[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/DoubleJumpIcon" unique_id=28663834]
+custom_minimum_size = Vector2(16, 8)
+custom_maximum_size = Vector2(16, 8)
+layout_mode = 0
+offset_left = 12.0
+offset_top = -4.0
+offset_right = 28.0
+offset_bottom = 4.0
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("6_ur7pv")
+theme_override_font_sizes/font_size = 8
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="WallJumpIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer" unique_id=185376645]
+custom_minimum_size = Vector2(16, 16)
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_3v2ag")
+
+[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/WallJumpIcon" unique_id=1049900119]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("AtlasTexture_hjaea")
+
+[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/WallJumpIcon" unique_id=1374174984]
+custom_minimum_size = Vector2(16, 8)
+custom_maximum_size = Vector2(16, 8)
+layout_mode = 0
+offset_left = 12.0
+offset_top = -4.0
+offset_right = 28.0
+offset_bottom = 4.0
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("6_ur7pv")
+theme_override_font_sizes/font_size = 8
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="DashIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer" unique_id=1528921656]
+custom_minimum_size = Vector2(16, 16)
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_jej6c")
+
+[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/DashIcon" unique_id=459009389]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("AtlasTexture_hjaea")
+
+[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/DashIcon" unique_id=228582100]
+custom_minimum_size = Vector2(16, 8)
+custom_maximum_size = Vector2(16, 8)
+layout_mode = 0
+offset_left = 12.0
+offset_top = -4.0
+offset_right = 28.0
+offset_bottom = 4.0
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("6_ur7pv")
+theme_override_font_sizes/font_size = 8
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

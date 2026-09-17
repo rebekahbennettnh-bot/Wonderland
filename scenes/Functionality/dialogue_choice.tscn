@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://da2bkxgq8f1py"]
+
+[ext_resource type="Script" uid="uid://cyq7nrnhymplo" path="res://scripts/dialogue_choice.gd" id="1_uccac"]
+[ext_resource type="FontFile" uid="uid://bduq5uplrcxrl" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="2_4pp3y"]
+[ext_resource type="Texture2D" uid="uid://coliw0ga378kn" path="res://assets/Title Screen/Text Nineslice.png" id="3_g6oet"]
+[ext_resource type="SpriteFrames" uid="uid://bcwh3720ubtoh" path="res://assets/Resources/player_portrait_spriteframe.tres" id="4_g6oet"]
+[ext_resource type="Texture2D" uid="uid://duaod5dqo0gfj" path="res://assets/Placeholders/dialogue_arrow.png" id="5_r0q3s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apxx0"]
+atlas = ExtResource("5_r0q3s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjaea"]
+atlas = ExtResource("5_r0q3s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8edl"]
+atlas = ExtResource("5_r0q3s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fprk8"]
+atlas = ExtResource("5_r0q3s")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln3xm"]
+atlas = ExtResource("5_r0q3s")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj5h5"]
+atlas = ExtResource("5_r0q3s")
+region = Rect2(16, 16, 16, 16)
+
+[node name="Dialogue Choice" type="Node2D" unique_id=132599493]
+script = ExtResource("1_uccac")
+
+[node name="TextboxUI" type="CanvasLayer" parent="." unique_id=123063210]
+layer = 2
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+follow_viewport_scale = 0.001
+
+[node name="PortraitRect" type="NinePatchRect" parent="TextboxUI" unique_id=562502158]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 56.0
+offset_top = 198.0
+offset_right = 104.0
+offset_bottom = 246.0
+texture = ExtResource("3_g6oet")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="PortraitSprite" type="AnimatedSprite2D" parent="TextboxUI/PortraitRect" unique_id=1661102312]
+position = Vector2(24, 24)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("4_g6oet")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.3920534
+
+[node name="TextboxRect" type="NinePatchRect" parent="TextboxUI" unique_id=156707467]
+custom_minimum_size = Vector2(320, 48)
+offset_left = 104.0
+offset_top = 198.0
+offset_right = 424.0
+offset_bottom = 246.0
+texture = ExtResource("3_g6oet")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="TextField" type="Label" parent="TextboxUI/TextboxRect" unique_id=2070040666]
+custom_minimum_size = Vector2(272, 32)
+custom_maximum_size = Vector2(272, 32)
+layout_mode = 1
+offset_right = 304.0
+offset_bottom = 41.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(8, 8)
+theme_override_fonts/font = ExtResource("2_4pp3y")
+theme_override_font_sizes/font_size = 8
+text = "Text goes here and can possibly be a very long string that should not cause issues with the text and spans up to three lines before it causes issues."
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="UpArrow" type="TextureButton" parent="TextboxUI/TextboxRect" unique_id=2072029640]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 8.0
+offset_right = 304.0
+offset_bottom = 24.0
+texture_normal = SubResource("AtlasTexture_apxx0")
+texture_pressed = SubResource("AtlasTexture_hjaea")
+texture_hover = SubResource("AtlasTexture_q8edl")
+
+[node name="DownArrow" type="TextureButton" parent="TextboxUI/TextboxRect" unique_id=445889573]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 24.0
+offset_right = 304.0
+offset_bottom = 40.0
+texture_normal = SubResource("AtlasTexture_fprk8")
+texture_pressed = SubResource("AtlasTexture_ln3xm")
+texture_hover = SubResource("AtlasTexture_bj5h5")
+
+[connection signal="pressed" from="TextboxUI/TextboxRect/UpArrow" to="." method="_on_up_arrow_pressed"]
+[connection signal="pressed" from="TextboxUI/TextboxRect/DownArrow" to="." method="_on_down_arrow_pressed"]

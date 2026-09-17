@@ -1,4 +1,5 @@
 extends Area2D
+class_name Lever
 
 @export var logic_channel : int
 var player_intersecting : bool

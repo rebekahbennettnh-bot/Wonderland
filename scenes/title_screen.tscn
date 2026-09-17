@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://x8r2k3a3th56"]
 
 [ext_resource type="Script" uid="uid://dio3u1o4ph8uw" path="res://scripts/title_screen.gd" id="1_fgkus"]
-[ext_resource type="Texture2D" uid="uid://crxje3d2oivb5" path="res://assets/Other/button9slice.png" id="2_cs5ya"]
+[ext_resource type="Texture2D" uid="uid://crxje3d2oivb5" path="res://assets/Original/button9slice.png" id="2_cs5ya"]
 [ext_resource type="Texture2D" uid="uid://kcfjik0kegne" path="res://icon.svg" id="2_mgrm8"]
 [ext_resource type="Texture2D" uid="uid://bbt250k72fdeq" path="res://assets/brackeys_platformer_assets/sprites/world_tileset.png" id="3_dc4i4"]
 [ext_resource type="Texture2D" uid="uid://bwf4idyace7ja" path="res://assets/Title Screen/wpi_logo.png" id="4_e54dn"]
 [ext_resource type="Texture2D" uid="uid://coliw0ga378kn" path="res://assets/Title Screen/Text Nineslice.png" id="5_dc4i4"]
 [ext_resource type="FontFile" uid="uid://bduq5uplrcxrl" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="6_e54dn"]
 [ext_resource type="AudioStream" uid="uid://0xnjtu6sg26t" path="res://assets/brackeys_platformer_assets/sounds/tap.wav" id="7_3yumr"]
-[ext_resource type="AudioStream" uid="uid://ch5dnglr8qhsj" path="res://assets/Other/skyscraper_seven-click-buttons-ui-menu-sounds-effects-button-7-203601.mp3" id="9_mykxm"]
-[ext_resource type="AudioStream" uid="uid://b1qp31mjqnl1p" path="res://assets/Other/bennett_rebekah.wav" id="10_tklts"]
+[ext_resource type="AudioStream" uid="uid://ch5dnglr8qhsj" path="res://assets/Original/skyscraper_seven-click-buttons-ui-menu-sounds-effects-button-7-203601.mp3" id="9_mykxm"]
+[ext_resource type="AudioStream" uid="uid://b1qp31mjqnl1p" path="res://assets/Original/bennett_rebekah.wav" id="10_tklts"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgrm8"]
 atlas = ExtResource("3_dc4i4")
@@ -84,8 +84,7 @@ patch_margin_right = 10
 patch_margin_bottom = 12
 
 [node name="Test Plane" type="Button" parent="MenuButtonContainer" unique_id=1366133655]
-visible = false
-modulate = Color(1, 1, 1, 0.09803922)
+modulate = Color(1, 1, 1, 0.2)
 layout_mode = 2
 text = "Test Plane"
 flat = true
@@ -250,7 +249,25 @@ custom_maximum_size = Vector2(248, -1)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(8, 0)
-text = "Version 1.2:
+text = "Version 1.3:
+Sprint 3
+Features:
+Added a tutorial level to show the new art and music (Layout still unfinished)
+(The test plane contains more mechanics and can still be accessed from the bottom button)
+Added an ability UI display to show which ones you have
+Abilities can now have time or usage limits
+Powerups can respawn after collection
+Added a dialogue choice system
+Partially implemented levers and doors
+Fixes:
+The player no longer rapidly slows at the end of a dash if still holding a movement key
+Powerups types are now visibly different (still placeholders)
+The jumping animation now plays properly
+Guide to new things:
+E on levers to open the doors, speak with the right NPC to initiate a dialogue choice, powerups with timers and respawns are found to the right in the test plane
+
+
+Version 1.2:
 Sprint 2
 Features:
 The map is now the test map, containing such additions as-

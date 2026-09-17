@@ -39,9 +39,8 @@ func splash_fadeout() -> void:
 
 func _on_play_button_pressed() -> void:
 	open_button_sound.play()
-	var game = preload("res://scenes/test_plane.tscn").instantiate()
-	get_parent().add_child(game)
-	queue_free()
+	var game = preload("res://scenes/Levels/tutorial.tscn").instantiate()
+	get_parent().start_level(game)
 
 func _on_credits_button_pressed() -> void:
 	open_button_sound.play()
@@ -72,6 +71,5 @@ func _on_cancel_button_pressed() -> void:
 
 func _on_test_button_pressed() -> void:
 	open_button_sound.play()
-	var game = preload("res://scenes/test_plane.tscn").instantiate()
-	get_parent().add_child(game)
-	queue_free()
+	var game = preload("res://scenes/Levels/test_plane.tscn").instantiate()
+	get_parent().start_level(game)

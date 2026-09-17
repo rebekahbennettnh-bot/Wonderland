@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://doays8ha8juty"]
+
+[ext_resource type="Script" uid="uid://dt4uhciafnbt2" path="res://scripts/lever.gd" id="1_ncfea"]
+[ext_resource type="Texture2D" uid="uid://54n570x27jui" path="res://assets/Placeholders/Game Lever Placeholder.png" id="2_qxmkn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apxx0"]
+atlas = ExtResource("2_qxmkn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaea"]
+size = Vector2(28, 29)
+
+[node name="Lever" type="Area2D" unique_id=1355419474]
+collision_layer = 256
+script = ExtResource("1_ncfea")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=573504923]
+texture = SubResource("AtlasTexture_apxx0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1488299319]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_hjaea")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
