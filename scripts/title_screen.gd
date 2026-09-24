@@ -36,6 +36,12 @@ func splash_fadeout() -> void:
 	alphabg.visible = false
 	wpi_splash.visible = false
 	alphabg.color.a = 0.75
+	
+func credit_start_autoscroll() -> void:
+	for i : int in 1000:
+		credits.scroll_vertical += 1
+		for n : int in 3:
+			await get_tree().process_frame
 
 func _on_play_button_pressed() -> void:
 	open_button_sound.play()
@@ -43,15 +49,18 @@ func _on_play_button_pressed() -> void:
 	get_parent().start_level(game)
 
 func _on_credits_button_pressed() -> void:
+	credits.scroll_vertical = 0
 	open_button_sound.play()
 	popup_selected = POPUPS.CREDITS
 	credits.visible = true
 	version.visible = false
 	cancel_button.visible = true
 	alphabg.visible = true
+	credit_start_autoscroll()
 
 
 func _on_version_button_pressed() -> void:
+	version.scroll_vertical = 0
 	open_button_sound.play()
 	popup_selected = POPUPS.VERSION
 	credits.visible = false

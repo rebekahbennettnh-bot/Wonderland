@@ -14,6 +14,7 @@ class_name NPC
 var choice_box : DialogueChoice
 var player_intersecting : bool
 var dialogue_state : int = 0
+var talking : bool
 var portrait_visible : bool
 enum CHARACTERS {SILPH, GELI, TUTORIAL_POPUP}
 
@@ -34,7 +35,6 @@ func _ready() -> void:
 		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
 		nametag.text = ""
 		portrait_visible = false
-		visible = false
 	sprite.flip_h = flip_direction
 	nametag.position = Vector2(264 - (nametag.size.x / 2), 246)
 	if !portrait_visible:
@@ -63,23 +63,35 @@ func _input(_event: InputEvent) -> void:
 		interact()
 		
 func interact() -> void:
-	var new_text : String = dialogue_tree()
-	if new_text != "":
-		#print(new_text)
-		display_dialogue(new_text)
+	if talking:
+		if text_field.visible_characters == text_field.text.length():
+			talking = false
+			textbox_ui.hide()
+		else:
+			talking = false
+	else:
+		textbox_ui.hide()
+		var new_text : String = dialogue_tree()
+		if new_text != "":
+			#print(new_text)
+			display_dialogue(new_text)
 
 func display_dialogue(new_text : String) -> void:
+	talking = true
 	textbox_ui.show()
 	text_field.text = new_text
 	text_field.visible_characters = 0
-	while (text_field.visible_characters < text_field.text.length()):
+	while (text_field.visible_characters < text_field.text.length() && talking):
 		text_field.visible_characters += 1
 		for i in 5:
 			await get_tree().process_frame
 		if !audio_player.playing:
 			audio_player.play()
+	talking = false
+	text_field.visible_characters = text_field.text.length()
 	await get_tree().create_timer(0.05 * text_field.visible_characters + 2).timeout
-	textbox_ui.hide()
+	if text_field.text == new_text:
+		textbox_ui.hide()
 	
 #This may need to be moved to a separate script or object at some point,
 #just to maintain clarity and avoid a huge tree, but it works for now
@@ -119,11 +131,35 @@ func dialogue_tree() -> String:
 			return ""
 	elif character == CHARACTERS.TUTORIAL_POPUP:
 		if dialogue_state == 0:
-			return "As you pass beneath the surface, you feel a familiar power.\n(SPACE to double jump)"
+			dialogue_state += 1
+			return "(SPACE to double jump)"
 		elif dialogue_state == 1:
-			return "Deeper within the earth, the feeling grows.\n(SPACE + A/D to wall jump)"
+			dialogue_state += 1
+			return "(SHIFT to dash)"
 		elif dialogue_state == 2:
-			return "Your pace picks up. You're late! You're late!\n(SHIFT to dash)"
+			dialogue_state += 1
+			return "(SPACE + A/D to wall jump)"
+		if dialogue_state == 3:
+			dialogue_state += 1
+			return "Oh...\nHello there."
+		elif dialogue_state == 4:
+			dialogue_state += 1
+			return "I'm the narrator. You aren't supposed to be in here. All I do for now is tell you about your abilities."
+		elif dialogue_state == 5:
+			dialogue_state += 1
+			return "Look, it would be best if you went back to the level and forgot this happened. I'll send you to the start, okay?"
+		elif dialogue_state == 6:
+			var choice1 = func():
+				var player_ref : PlayerController = get_parent().get_parent().get_node("Player")
+				player_ref.position = Vector2(0, -208)
+			var choice2 = func():
+				print("Empty choice picked.")
+			var choice3 = func():
+				self.dialogue_state += 1
+			prompt_choice(PackedStringArray(["Okay.", "I can get back on my own.", "Will I see you again?"]), [choice1, choice2, choice3])
+		elif dialogue_state == 7:
+			dialogue_state -= 1
+			return "Possibly, if you keep poking around like this. You shouldn't, though."
 	return ""
 	
 func prompt_choice(choices : PackedStringArray, outcomes : Array[Callable]) -> void:
