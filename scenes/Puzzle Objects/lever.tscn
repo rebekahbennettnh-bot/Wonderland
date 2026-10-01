@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dt4uhciafnbt2" path="res://scripts/lever.gd" id="1_ncfea"]
 [ext_resource type="Texture2D" uid="uid://54n570x27jui" path="res://assets/Placeholders/Game Lever Placeholder.png" id="2_qxmkn"]
+[ext_resource type="AudioStream" uid="uid://dbfxvgiyb7keb" path="res://assets/Original/513481__budek__click.wav" id="3_ybu63"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apxx0"]
 atlas = ExtResource("2_qxmkn")
-region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaea"]
 size = Vector2(28, 29)
@@ -20,6 +20,10 @@ texture = SubResource("AtlasTexture_apxx0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1488299319]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_hjaea")
+
+[node name="513481BudekClick" type="AudioStreamPlayer" parent="." unique_id=763549928]
+stream = ExtResource("3_ybu63")
+volume_db = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

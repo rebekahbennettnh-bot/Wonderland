@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://10iqhbb8eeuf" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://topqrc5tjxnf" path="res://assets/Original/rabbitcharacterresize.png" id="2_g2els"]
-[ext_resource type="Texture2D" uid="uid://coliw0ga378kn" path="res://assets/Title Screen/Text Nineslice.png" id="3_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://ba72aq8tk70hb" path="res://assets/Placeholders/LightTextNineslice.png" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://bgdavd3c5xogg" path="res://assets/Placeholders/Wonderland Ability Icons Placeholder.png" id="4_fjrip"]
+[ext_resource type="Texture2D" uid="uid://dh22hweufsdry" path="res://assets/Placeholders/Wonderland Ability Icons Dark.png" id="4_tuyoq"]
 [ext_resource type="FontFile" uid="uid://bduq5uplrcxrl" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="6_ur7pv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
@@ -132,7 +133,7 @@ radius = 3.0
 height = 22.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apxx0"]
-atlas = ExtResource("4_fjrip")
+atlas = ExtResource("4_tuyoq")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hjaea"]
@@ -140,11 +141,11 @@ atlas = ExtResource("4_fjrip")
 region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
-atlas = ExtResource("4_fjrip")
+atlas = ExtResource("4_tuyoq")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
-atlas = ExtResource("4_fjrip")
+atlas = ExtResource("4_tuyoq")
 region = Rect2(0, 16, 16, 16)
 
 [node name="Player" type="CharacterBody2D" unique_id=1988823864]
@@ -166,13 +167,23 @@ position = Vector2(0, -11)
 shape = SubResource("CapsuleShape2D_tklts")
 
 [node name="LeftWallRay" type="RayCast2D" parent="." unique_id=611875480]
-position = Vector2(0, -5)
-target_position = Vector2(-6, 0)
+position = Vector2(0, -3)
+target_position = Vector2(-5, 0)
+collision_mask = 2
+
+[node name="TopLeftWallRay" type="RayCast2D" parent="." unique_id=1176512265]
+position = Vector2(0, -15)
+target_position = Vector2(-5, 0)
 collision_mask = 2
 
 [node name="RightWallRay" type="RayCast2D" parent="." unique_id=992108787]
-position = Vector2(0, -5)
-target_position = Vector2(6, 0)
+position = Vector2(0, -3)
+target_position = Vector2(5, 0)
+collision_mask = 2
+
+[node name="TopRightWallRay" type="RayCast2D" parent="." unique_id=635812072]
+position = Vector2(0, -15)
+target_position = Vector2(5, 0)
 collision_mask = 2
 
 [node name="AbilitiesUI" type="CanvasLayer" parent="." unique_id=2097764555]
@@ -180,58 +191,53 @@ scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="AbilitiesRect" type="NinePatchRect" parent="AbilitiesUI" unique_id=624248485]
-custom_minimum_size = Vector2(96, 32)
-custom_maximum_size = Vector2(96, 32)
-offset_left = 192.0
-offset_top = 24.0
-offset_right = 288.0
-offset_bottom = 56.0
-texture = ExtResource("3_tuyoq")
+custom_minimum_size = Vector2(32, 36)
+custom_maximum_size = Vector2(32, 92)
+offset_left = 8.0
+offset_top = 226.0
+offset_right = 40.0
+offset_bottom = 262.0
+pivot_offset_ratio = Vector2(0, 1)
+texture = ExtResource("3_qlg0r")
 patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15
 patch_margin_bottom = 15
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AbilitiesUI/AbilitiesRect" unique_id=1610738752]
-custom_minimum_size = Vector2(72, 16)
-custom_maximum_size = Vector2(72, 16)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -8.0
-offset_right = 32.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 12
-alignment = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="AbilitiesUI/AbilitiesRect" unique_id=534429216]
+custom_minimum_size = Vector2(16, 24)
+custom_maximum_size = Vector2(16, 72)
+propagate_maximum_size = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 24.0
+offset_bottom = 30.0
+theme_override_constants/separation = 4
 
-[node name="DoubleJumpIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer" unique_id=1447269535]
-custom_minimum_size = Vector2(16, 16)
+[node name="DoubleJumpIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/VBoxContainer" unique_id=1447269535]
+custom_minimum_size = Vector2(16, 24)
 custom_maximum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_apxx0")
+stretch_mode = 2
 
-[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/DoubleJumpIcon" unique_id=943278988]
+[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/VBoxContainer/DoubleJumpIcon" unique_id=943278988]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hjaea")
 
-[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/DoubleJumpIcon" unique_id=28663834]
+[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/VBoxContainer/DoubleJumpIcon" unique_id=28663834]
 custom_minimum_size = Vector2(16, 8)
 custom_maximum_size = Vector2(16, 8)
 layout_mode = 0
-offset_left = 12.0
-offset_top = -4.0
-offset_right = 28.0
-offset_bottom = 4.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 24.0
 offset_transform_enabled = true
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_ur7pv")
 theme_override_font_sizes/font_size = 8
 text = "99"
@@ -239,28 +245,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="WallJumpIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer" unique_id=185376645]
-custom_minimum_size = Vector2(16, 16)
-custom_maximum_size = Vector2(32, 32)
+[node name="WallJumpIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/VBoxContainer" unique_id=185376645]
+custom_minimum_size = Vector2(16, 24)
+custom_maximum_size = Vector2(16, 24)
 layout_mode = 2
 texture = SubResource("AtlasTexture_3v2ag")
+stretch_mode = 2
 
-[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/WallJumpIcon" unique_id=1049900119]
+[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/VBoxContainer/WallJumpIcon" unique_id=1049900119]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hjaea")
 
-[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/WallJumpIcon" unique_id=1374174984]
+[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/VBoxContainer/WallJumpIcon" unique_id=1374174984]
 custom_minimum_size = Vector2(16, 8)
 custom_maximum_size = Vector2(16, 8)
 layout_mode = 0
-offset_left = 12.0
-offset_top = -4.0
-offset_right = 28.0
-offset_bottom = 4.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 24.0
 offset_transform_enabled = true
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_ur7pv")
 theme_override_font_sizes/font_size = 8
 text = "99"
@@ -268,28 +275,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="DashIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer" unique_id=1528921656]
-custom_minimum_size = Vector2(16, 16)
-custom_maximum_size = Vector2(32, 32)
+[node name="DashIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/VBoxContainer" unique_id=1528921656]
+custom_minimum_size = Vector2(16, 24)
+custom_maximum_size = Vector2(16, 24)
 layout_mode = 2
 texture = SubResource("AtlasTexture_jej6c")
+stretch_mode = 2
 
-[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/DashIcon" unique_id=459009389]
+[node name="TimerIcon" type="TextureRect" parent="AbilitiesUI/AbilitiesRect/VBoxContainer/DashIcon" unique_id=459009389]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hjaea")
 
-[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/HBoxContainer/DashIcon" unique_id=228582100]
+[node name="UsesText" type="Label" parent="AbilitiesUI/AbilitiesRect/VBoxContainer/DashIcon" unique_id=228582100]
 custom_minimum_size = Vector2(16, 8)
 custom_maximum_size = Vector2(16, 8)
 layout_mode = 0
-offset_left = 12.0
-offset_top = -4.0
-offset_right = 28.0
-offset_bottom = 4.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 24.0
 offset_transform_enabled = true
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_ur7pv")
 theme_override_font_sizes/font_size = 8
 text = "99"

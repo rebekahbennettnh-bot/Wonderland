@@ -1,17 +1,18 @@
 [gd_scene format=3 uid="uid://bbmixkr6udf3m"]
 
-[ext_resource type="Texture2D" uid="uid://b0dn4xiispady" path="res://assets/Placeholders/Game Door Placeholder.png" id="1_hpvv5"]
 [ext_resource type="Script" uid="uid://ba034qyol0oap" path="res://scripts/door.gd" id="1_uvdjg"]
+[ext_resource type="Texture2D" uid="uid://cckvo03cmfc1o" path="res://assets/Placeholders/WonderlandGrassPlaceholder.png" id="2_5reu5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hjaea"]
-atlas = ExtResource("1_hpvv5")
-region = Rect2(0, 0, 16, 32)
+atlas = ExtResource("2_5reu5")
+region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_apxx0"]
-size = Vector2(16, 32)
+size = Vector2(16, 16)
 
 [node name="Door" type="AnimatableBody2D" unique_id=1551555883]
-collision_layer = 64
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_uvdjg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=154299704]

@@ -22,8 +22,8 @@ func _ready() -> void:
 	nineslicec.custom_minimum_size = nineslicec.get_parent_control().size
 	nineslicec.custom_maximum_size = nineslicec.get_parent_control().size
 	var nineslicev : NinePatchRect = version.get_child(0).get_child(0)
-	nineslicev.custom_minimum_size = nineslicev.get_parent_control().size
-	nineslicev.custom_maximum_size = nineslicev.get_parent_control().size
+	nineslicev.custom_minimum_size = nineslicev.get_parent_control().size + Vector2(8, 0)
+	nineslicev.custom_maximum_size = nineslicev.get_parent_control().size + Vector2(8, 0)
 
 func splash_fadeout() -> void:
 	var alpha : float = 1.0

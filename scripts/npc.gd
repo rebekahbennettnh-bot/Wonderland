@@ -16,9 +16,12 @@ var player_intersecting : bool
 var dialogue_state : int = 0
 var talking : bool
 var portrait_visible : bool
-enum CHARACTERS {SILPH, GELI, TUTORIAL_POPUP}
+enum CHARACTERS {SILPH, GELI, TUTORIAL_NARRATOR, CHESHIRE_CAT, LEVEL1_NARRATOR}
+var narrator_tracker : int
 
 func _ready() -> void:
+	var root_reference : RootNode = get_tree().current_scene
+	narrator_tracker = root_reference.narrator_tracker
 	textbox_ui.hide()
 	if character == CHARACTERS.SILPH:
 		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
@@ -30,7 +33,18 @@ func _ready() -> void:
 		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
 		nametag.text = "Geli"
 		portrait_visible = true
-	elif character == CHARACTERS.TUTORIAL_POPUP:
+	elif character == CHARACTERS.TUTORIAL_NARRATOR:
+		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
+		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
+		nametag.text = ""
+		portrait_visible = false
+	elif character == CHARACTERS.CHESHIRE_CAT:
+		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
+		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
+		nametag.text = "Cheshire Cat"
+		portrait_visible = true
+		textbox_ui.layer += 1
+	elif character == CHARACTERS.LEVEL1_NARRATOR:
 		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
 		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
 		nametag.text = ""
@@ -129,7 +143,7 @@ func dialogue_tree() -> String:
 			new_slime.position = self.position + Vector2(64, 41)
 			add_child(new_slime)
 			return ""
-	elif character == CHARACTERS.TUTORIAL_POPUP:
+	elif character == CHARACTERS.TUTORIAL_NARRATOR:
 		if dialogue_state == 0:
 			dialogue_state += 1
 			return "(SPACE to double jump)"
@@ -143,23 +157,111 @@ func dialogue_tree() -> String:
 			dialogue_state += 1
 			return "Oh...\nHello there."
 		elif dialogue_state == 4:
-			dialogue_state += 1
+			dialogue_state += 3
 			return "I'm the narrator. You aren't supposed to be in here. All I do for now is tell you about your abilities."
 		elif dialogue_state == 5:
 			dialogue_state += 1
-			return "Look, it would be best if you went back to the level and forgot this happened. I'll send you to the start, okay?"
+			return "Every textbox has to come from somewhere, of course. Why not make it diagetic?"
 		elif dialogue_state == 6:
+			dialogue_state += 1
+			return "Look, it would be best if you went back to the level and forgot this happened. I'll send you to the start, okay?"
+		elif dialogue_state == 7:
 			var choice1 = func():
 				var player_ref : PlayerController = get_parent().get_parent().get_node("Player")
 				player_ref.position = Vector2(0, -208)
 			var choice2 = func():
 				print("Empty choice picked.")
 			var choice3 = func():
-				self.dialogue_state += 1
-			prompt_choice(PackedStringArray(["Okay.", "I can get back on my own.", "Will I see you again?"]), [choice1, choice2, choice3])
-		elif dialogue_state == 7:
+				self.dialogue_state = 8
+				self.interact()
 			dialogue_state -= 1
-			return "Possibly, if you keep poking around like this. You shouldn't, though."
+			prompt_choice(PackedStringArray(["Okay.", "I can get back on my own.", "Will I see you again?"]), [choice1, choice2, choice3])
+		elif dialogue_state == 8:
+			dialogue_state = 7
+			var root_node : RootNode = get_tree().current_scene
+			root_node.narrator_tracker = 1
+			return "Possibly, if you keep poking around like this. You shouldn't, though. I can't promise there will be anything else for you."
+	elif character == CHARACTERS.CHESHIRE_CAT:
+		if dialogue_state == 0:
+			dialogue_state += 1
+			return "Hello again, Not Stranger.\nI am the Cheshire Cat."
+		elif dialogue_state == 1:
+			dialogue_state += 1
+			return "That extra jump you made, such a familiar sight. That was the power of Wonderland."
+		elif dialogue_state == 2:
+			dialogue_state += 1
+			return "Now you're here, you'll have to learn to share. Don't expect it to last forever!"
+		if dialogue_state == 3:
+			dialogue_state += 1
+			cheshire_fadeout()
+			return "Now, if you want to pass, I need a favor in turn. Come a little further and help me find my head. I'll be waiting for you..."
+		elif dialogue_state == 4:
+			dialogue_state += 1
+			return "You've made it. Now, I need your help to find my head."
+		elif dialogue_state == 5:
+			dialogue_state += 1
+			return "I worry the Queen wants it, so it's good to keep a spare. It should be just behind those striped blocks."
+		elif dialogue_state == 6:
+			dialogue_state += 1
+			return "Pull all nine levers and then I'll let you through.\nHop to it, rabbit!"
+		elif dialogue_state == 7:
+			return "You still haven't pulled all the levers."
+		elif dialogue_state == 8:
+			dialogue_state += 1
+			var level_ref : Level1 = get_parent().get_parent()
+			level_ref.signal_bus.broadcast_logic_update.emit(10, true)
+			return "Nicely done, it looks just like me. I'll let you through now."
+		elif dialogue_state == 9:
+			return "Best of luck up ahead. I don't fancy the Queen will let you past again."
+	elif character == CHARACTERS.LEVEL1_NARRATOR:
+		if dialogue_state == 0:
+			dialogue_state += 1
+			return "Press E to interact with characters and levers."
+		elif dialogue_state == 1:
+			if narrator_tracker == 0:
+				dialogue_state += 1
+				return "Oh...\nHello there."
+			else:
+				dialogue_state = 6
+				return "Oh!\nHello again."
+		elif dialogue_state == 2:
+			dialogue_state += 1
+			return "I'm the narrator. You aren't supposed to be in here. All I do here is teach you to interact."
+		elif dialogue_state == 3:
+			dialogue_state += 1
+			return "Every textbox has to come from somewhere, of course. Why not make it diagetic?"
+		if dialogue_state == 4:
+			dialogue_state += 1
+			return "I'm sorry, perhaps if we had met earlier, I might have more to say to you. For now, though, the only thing to do is return to the level."
+		elif dialogue_state == 5:
+			var root_node : RootNode = get_tree().current_scene
+			root_node.narrator_tracker = 1
+			return "..."
+		elif dialogue_state == 6:
+			dialogue_state += 1
+			return "You've found me a second time. I guess you like backtracking."
+		elif dialogue_state == 7:
+			dialogue_state += 1
+			return "I'm here to let you know about interacting, which you seem to know how to do already."
+		elif dialogue_state == 8:
+			dialogue_state += 1
+			return "In that case, I really don't know what else to offer you. I could send you back to the puzzle if you want?"
+		elif dialogue_state == 9:
+			var choice1 = func():
+				self.dialogue_state = 10
+				self.interact()
+			var choice2 = func():
+				var player_ref : PlayerController = get_parent().get_parent().get_node("Player")
+				player_ref.position = Vector2(0, -208)
+			var choice3 = func():
+				print("Empty choice picked.")
+			dialogue_state -= 1
+			prompt_choice(PackedStringArray(["Will you be in the next level too?", "Sounds good.", "I'd rather walk."]), [choice1, choice2, choice3])
+		elif dialogue_state == 10:
+			dialogue_state = 8
+			var root_node : RootNode = get_tree().current_scene
+			root_node.narrator_tracker = 2
+			return "I assume so, as long as there are things to be explained. Planning to look for me again, are you?"
 	return ""
 	
 func prompt_choice(choices : PackedStringArray, outcomes : Array[Callable]) -> void:
@@ -169,3 +271,16 @@ func prompt_choice(choices : PackedStringArray, outcomes : Array[Callable]) -> v
 		new_choice_box.construct(choices, outcomes, self)
 		choice_box = new_choice_box
 		choice_box.initiate_choice()
+		
+func cheshire_fadeout() -> void:
+	var alpha : float = 1.0
+	await get_tree().create_timer(1).timeout
+	while (talking):
+		await get_tree().process_frame
+	while (alpha >= 0.005):
+		alpha -= 0.005
+		sprite.self_modulate.a = alpha
+		await get_tree().process_frame
+	while (textbox_ui.visible):
+		await get_tree().process_frame
+	queue_free() 

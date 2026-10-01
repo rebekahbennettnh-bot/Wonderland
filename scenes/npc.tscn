@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://chw31glc3jty3" path="res://assets/Resources/placeholder_spriteframe.tres" id="2_rv78h"]
 [ext_resource type="AudioStream" uid="uid://d2jm4p0x3uryh" path="res://assets/brackeys_platformer_assets/sounds/hurt.wav" id="3_rv78h"]
 [ext_resource type="SpriteFrames" uid="uid://bek05v0wbthgm" path="res://assets/Resources/placeholder_portrait_spriteframe.tres" id="4_4wlns"]
-[ext_resource type="Texture2D" uid="uid://coliw0ga378kn" path="res://assets/Title Screen/Text Nineslice.png" id="5_tl2vt"]
+[ext_resource type="Texture2D" uid="uid://ba72aq8tk70hb" path="res://assets/Placeholders/LightTextNineslice.png" id="5_tl2vt"]
 [ext_resource type="FontFile" uid="uid://bduq5uplrcxrl" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="6_tl2vt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_apxx0"]
@@ -36,6 +36,7 @@ stream = SubResource("AudioStreamRandomizer_hjaea")
 autoplay = true
 
 [node name="TextboxUI" type="CanvasLayer" parent="." unique_id=1709425947]
+visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
@@ -100,12 +101,14 @@ offset_right = 304.0
 offset_bottom = 41.0
 offset_transform_enabled = true
 offset_transform_position = Vector2(8, 8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_tl2vt")
 theme_override_font_sizes/font_size = 8
 text = "Text goes here and can possibly be a very long string that should not cause issues with the text and spans up to three lines before it causes issues."
 autowrap_mode = 3
 clip_text = true
 text_overrun_behavior = 6
+visible_characters_behavior = 1
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://rtqamtoag4tj"]
 
 [ext_resource type="Texture2D" uid="uid://cckvo03cmfc1o" path="res://assets/Placeholders/WonderlandGrassPlaceholder.png" id="1_ax68v"]
-[ext_resource type="Texture2D" uid="uid://c7areccp5gtth" path="res://assets/Original/Level_1__3_Tile_Map.png" id="1_tyka7"]
+[ext_resource type="Texture2D" uid="uid://bpkevhj4jqgvs" path="res://assets/Original/Level_1__3_Tile_Map_Alt.png" id="1_tyka7"]
 [ext_resource type="Texture2D" uid="uid://basubk4nrh8y8" path="res://assets/Original/Tutorial_SpriteSheet_2.png" id="2_tyka7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3d2s4"]
@@ -17,7 +17,6 @@ texture = ExtResource("1_tyka7")
 4:0/0 = 0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:0/0 = 0
-5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0 = 0
@@ -29,7 +28,6 @@ texture = ExtResource("1_tyka7")
 4:1/0 = 0
 4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:1/0 = 0
-5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:2/0 = 0

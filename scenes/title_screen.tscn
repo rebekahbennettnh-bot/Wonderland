@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://kcfjik0kegne" path="res://icon.svg" id="2_mgrm8"]
 [ext_resource type="Texture2D" uid="uid://bbt250k72fdeq" path="res://assets/brackeys_platformer_assets/sprites/world_tileset.png" id="3_dc4i4"]
 [ext_resource type="Texture2D" uid="uid://bwf4idyace7ja" path="res://assets/Title Screen/wpi_logo.png" id="4_e54dn"]
-[ext_resource type="Texture2D" uid="uid://coliw0ga378kn" path="res://assets/Title Screen/Text Nineslice.png" id="5_dc4i4"]
+[ext_resource type="Texture2D" uid="uid://ba72aq8tk70hb" path="res://assets/Placeholders/LightTextNineslice.png" id="4_tklts"]
 [ext_resource type="FontFile" uid="uid://bduq5uplrcxrl" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="6_e54dn"]
 [ext_resource type="AudioStream" uid="uid://0xnjtu6sg26t" path="res://assets/brackeys_platformer_assets/sounds/tap.wav" id="7_3yumr"]
 [ext_resource type="AudioStream" uid="uid://ch5dnglr8qhsj" path="res://assets/Original/skyscraper_seven-click-buttons-ui-menu-sounds-effects-button-7-203601.mp3" id="9_mykxm"]
@@ -117,6 +117,7 @@ offset_right = 1.0
 offset_bottom = -26.333332
 grow_horizontal = 2
 scale = Vector2(0.667, 1.333)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Wonderland"
 
 [node name="Subtitle" type="Label" parent="Titlecard" unique_id=1902945961]
@@ -133,23 +134,23 @@ offset_bottom = -71.66667
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.667, 1.333)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Placeholder Titlecard"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Titlecard" unique_id=119815232]
-custom_minimum_size = Vector2(128, 128)
-custom_maximum_size = Vector2(128, 128)
-anchors_preset = 8
-anchor_left = 0.5
+custom_minimum_size = Vector2(256, 128)
+custom_maximum_size = Vector2(256, 128)
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
+offset_left = -64.0
 offset_top = -128.0
-grow_horizontal = 2
+offset_right = 192.0
 grow_vertical = 2
+scale = Vector2(0.5, 1)
 offset_transform_enabled = true
-texture = ExtResource("5_dc4i4")
+texture = ExtResource("4_tklts")
 patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15
@@ -195,6 +196,7 @@ scroll_hint_mode = 3
 custom_minimum_size = Vector2(248, 0)
 custom_maximum_size = Vector2(248, -1)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "
 
 
@@ -229,7 +231,7 @@ custom_maximum_size = Vector2(256, 192)
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 192.0
-texture = ExtResource("5_dc4i4")
+texture = ExtResource("4_tklts")
 patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15
@@ -259,7 +261,20 @@ custom_maximum_size = Vector2(248, -1)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(8, 0)
-text = "Version 1.4:
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Version 1.5:
+Sprint 5
+Additions:
+Level 1 has been implemented!
+Try out levers and time-restricted abilities as you help the Cheshire Cat find his head!
+Changes:
+The finer details of movement have been adjusted (hangtime and input buffering, plus slight jump height increase) and should now better match player's intended inputs
+A brand new textbox to go with a less obstructive ability UI
+A character in the tutorial level has moved somewhere new...
+Fixes:
+The exit to the tutorial now functions, instead of trapping the player in an offscreen pit (The level 1 exit still will, however)
+
+Version 1.4:
 Sprint 4
 Features:
 The tutorial level is now complete!* It has a small area to test out each ability, and a secret to see other existing features...
@@ -331,7 +346,7 @@ offset_right = 256.0
 offset_bottom = 192.0
 offset_transform_enabled = true
 offset_transform_position = Vector2(-8, 0)
-texture = ExtResource("5_dc4i4")
+texture = ExtResource("4_tklts")
 patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15
@@ -369,7 +384,7 @@ offset_right = 32.0
 offset_bottom = 32.0
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -1)
-texture = ExtResource("5_dc4i4")
+texture = ExtResource("4_tklts")
 patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15

@@ -27,27 +27,36 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is PlayerController:
 		if powerup_type == POWERUPS.WALL_JUMP:
 			body.wall_jump_enabled = true
-			if powerup_count > 0:
-				body.wall_jump_count = powerup_count
-			elif powerup_timer > 0.1:
-				body.wall_jump_duration = powerup_timer
+			if powerup_count > 0 && body.wall_jump_count != -1:
+				body.wall_jump_count =  max(body.wall_jump_count, powerup_count)
+			elif powerup_timer > 0.1 && !(body.wall_jump_duration < -0.5):
+				body.wall_jump_duration = max(body.wall_jump_duration, powerup_timer)
+			else:
+				body.wall_jump_count = -1
+				body.wall_jump_duration = -1
 		elif powerup_type == POWERUPS.DOUBLE_JUMP:
 			body.double_jump_enabled = true
-			if powerup_count > 0:
-				body.double_jump_count = powerup_count
-			elif powerup_timer > 0.1:
-				body.double_jump_duration = powerup_timer
+			if powerup_count > 0 && body.double_jump_count != -1:
+				body.double_jump_count = max(body.double_jump_count, powerup_count)
+			elif powerup_timer > 0.1 && !(body.double_jump_duration < -0.5):
+				body.double_jump_duration = max(body.double_jump_duration, powerup_timer)
+			else:
+				body.double_jump_count = -1
+				body.double_jump_duration = -1
 		elif powerup_type == POWERUPS.DASH:
 			body.dash_enabled = true
-			if powerup_count > 0:
-				body.dash_count = powerup_count
-			elif powerup_timer > 0.1:
-				body.dash_duration = powerup_timer
+			if powerup_count > 0  && body.dash_count != -1:
+				body.dash_count = max(body.dash_count, powerup_count)
+			elif powerup_timer > 0.1 && !(body.dash_duration < -0.5):
+				body.dash_duration = max(body.dash_duration, powerup_timer)
+			else:
+				body.dash_count = -1
+				body.dash_duration = -1
 		#Play collection animation & sound
 		body.update_powerup_icons()
 		visible = false
-		set_collision_layer_value(1, false)
+		set_collision_mask_value(1, false)
 		if respawn_time > 0.1:
 			await get_tree().create_timer(respawn_time).timeout
 			visible = true
-			set_collision_layer_value(1, true)
+			set_collision_mask_value(1, true)
