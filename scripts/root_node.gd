@@ -28,9 +28,9 @@ func start_level_1() -> void:
 	start_level(level_1)
 
 func start_tutorial() -> void:
-	var tutorial = preload("res://scenes/Levels/tutorial.tscn").instantiate()
+	var tutorial = preload("res://scenes/Levels/level_1.tscn").instantiate()
 	start_level(tutorial)
 	
 func start_test_plane() -> void:
-	var test_plane = preload("res://scenes/Levels/test_plane.tscn").instantiate()
+	var test_plane = preload("res://scenes/Levels/level_2.tscn").instantiate()
 	start_level(test_plane)

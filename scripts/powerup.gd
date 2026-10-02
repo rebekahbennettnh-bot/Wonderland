@@ -54,9 +54,13 @@ func _on_body_entered(body: Node2D) -> void:
 				body.dash_duration = -1
 		#Play collection animation & sound
 		body.update_powerup_icons()
-		visible = false
+		#visible = false
+		sprite.self_modulate.a = 0.25
 		set_collision_mask_value(1, false)
 		if respawn_time > 0.1:
 			await get_tree().create_timer(respawn_time).timeout
-			visible = true
+			#visible = true
+			sprite.self_modulate.a = 1
 			set_collision_mask_value(1, true)
+		else:
+			queue_free()

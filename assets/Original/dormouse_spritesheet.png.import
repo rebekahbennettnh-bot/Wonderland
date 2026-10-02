@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daj6ubepbmbgm"
-path="res://.godot/imported/Wonderland_Platforms.png-92ed788d17c53633106d6ea1492784f2.ctex"
+uid="uid://bht4chlqr4pta"
+path="res://.godot/imported/dormouse_spritesheet.png-6b691a9b44b6822d6e62cfe4029327bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Placeholders/Wonderland_Platforms.png"
-dest_files=["res://.godot/imported/Wonderland_Platforms.png-92ed788d17c53633106d6ea1492784f2.ctex"]
+source_file="res://assets/Original/dormouse_spritesheet.png"
+dest_files=["res://.godot/imported/dormouse_spritesheet.png-6b691a9b44b6822d6e62cfe4029327bd.ctex"]
 
 [params]
 

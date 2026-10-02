@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://72yv8q1ev8h5"]
 
 [ext_resource type="Script" uid="uid://bh30x6mrmb8my" path="res://scripts/platform.gd" id="1_nlgqw"]
-[ext_resource type="Texture2D" uid="uid://daj6ubepbmbgm" path="res://assets/Placeholders/Wonderland_Platforms.png" id="2_nlgqw"]
+[ext_resource type="Texture2D" uid="uid://dhoxrrq4yx7up" path="res://assets/Placeholders/Wonderland_Platforms2.png" id="2_nlgqw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8edl"]
 atlas = ExtResource("2_nlgqw")

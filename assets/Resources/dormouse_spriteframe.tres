@@ -1,0 +1,72 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cp37veds1jpwj"]
+
+[ext_resource type="Texture2D" uid="uid://bht4chlqr4pta" path="res://assets/Original/dormouse_spritesheet.png" id="1_tg5an"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcwcm"]
+atlas = ExtResource("1_tg5an")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yowt"]
+atlas = ExtResource("1_tg5an")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgcmr"]
+atlas = ExtResource("1_tg5an")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4okcr"]
+atlas = ExtResource("1_tg5an")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tvbs"]
+atlas = ExtResource("1_tg5an")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n54li"]
+atlas = ExtResource("1_tg5an")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvxhl"]
+atlas = ExtResource("1_tg5an")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbnp1"]
+atlas = ExtResource("1_tg5an")
+region = Rect2(32, 64, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcwcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yowt")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgcmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4okcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tvbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n54li")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvxhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbnp1")
+}],
+"loop": 1,
+"name": &"sleeping",
+"speed": 2.0
+}]

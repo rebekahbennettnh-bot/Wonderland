@@ -10,5 +10,7 @@ func _ready() -> void:
 		atlas.region = Rect2(0, 0, 32, 14)
 	elif style == STYLES.LEVEL_1:
 		atlas.region = Rect2(32, 0, 32, 14)
+	elif style == STYLES.LEVEL_2:
+		atlas.region = Rect2(32, 32, 32, 14)
 	if style == STYLES.LEVEL_3:
 		atlas.region = Rect2(0, 32, 32, 14)

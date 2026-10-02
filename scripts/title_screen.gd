@@ -27,9 +27,9 @@ func _ready() -> void:
 
 func splash_fadeout() -> void:
 	var alpha : float = 1.0
-	await get_tree().create_timer(1.5).timeout
-	while (alpha >= 0.0025):
-		alpha -= 0.0025
+	await get_tree().create_timer(1.0).timeout
+	while (alpha >= 0.004):
+		alpha -= 0.004
 		alphabg.color.a = alpha
 		wpi_splash.self_modulate.a = alpha
 		await get_tree().process_frame
@@ -45,8 +45,8 @@ func credit_start_autoscroll() -> void:
 
 func _on_play_button_pressed() -> void:
 	open_button_sound.play()
-	var game = preload("res://scenes/Levels/tutorial.tscn").instantiate()
-	get_parent().start_level(game)
+	var root_ref : RootNode = get_parent()
+	root_ref.start_tutorial()
 
 func _on_credits_button_pressed() -> void:
 	credits.scroll_vertical = 0
@@ -80,5 +80,5 @@ func _on_cancel_button_pressed() -> void:
 
 func _on_test_button_pressed() -> void:
 	open_button_sound.play()
-	var game = preload("res://scenes/Levels/test_plane.tscn").instantiate()
-	get_parent().start_level(game)
+	var root_ref : RootNode = get_parent()
+	root_ref.start_test_plane()

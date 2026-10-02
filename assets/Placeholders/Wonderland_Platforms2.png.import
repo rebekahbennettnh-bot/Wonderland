@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgpgoftsyhbat"
-path="res://.godot/imported/PlatformGrass Placeholder.png-d1848c0f4958f605341ded9b82661255.ctex"
+uid="uid://dhoxrrq4yx7up"
+path="res://.godot/imported/Wonderland_Platforms2.png-80d8529e4b217356674945b750c0b24d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Placeholders/PlatformGrass Placeholder.png"
-dest_files=["res://.godot/imported/PlatformGrass Placeholder.png-d1848c0f4958f605341ded9b82661255.ctex"]
+source_file="res://assets/Placeholders/Wonderland_Platforms2.png"
+dest_files=["res://.godot/imported/Wonderland_Platforms2.png-80d8529e4b217356674945b750c0b24d.ctex"]
 
 [params]
 
