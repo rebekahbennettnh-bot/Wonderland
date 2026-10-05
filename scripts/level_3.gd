@@ -26,7 +26,7 @@ func generate_tower() -> void:
 			if new_part.get_cell_atlas_coords(tile) == Vector2i(2, 2):
 				powerup_style = Powerup.POWERUPS.WALL_JUMP
 			elif new_part.get_cell_atlas_coords(tile) == Vector2i(1, 3):
-				powerup_style = Powerup.POWERUPS.WALL_JUMP
+				powerup_style = Powerup.POWERUPS.DASH
 			var new_powerup : Powerup = load("res://scenes/powerup.tscn").instantiate()
 			new_powerup.powerup_count = -1
 			new_powerup.powerup_timer = 5
