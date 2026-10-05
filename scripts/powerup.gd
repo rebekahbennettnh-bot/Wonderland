@@ -1,4 +1,5 @@
 extends Area2D
+class_name Powerup
 
 @export var powerup_type : POWERUPS
 @export var powerup_count : int

@@ -36,6 +36,8 @@ var dash_buffer : float
 var hangtime_active : bool
 var gravity_modifier : float = 1.0
 
+var old_y : float
+
 func _ready() -> void:
 	if wall_jump_enabled:
 		wall_jump_count = -1
@@ -49,6 +51,7 @@ func _ready() -> void:
 	update_powerup_icons()
 	
 func _physics_process(delta: float) -> void:
+	old_y = velocity.y
 	if movement_frozen:
 		return
 	

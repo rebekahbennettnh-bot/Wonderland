@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bjk182e4pto30"]
+
+[ext_resource type="Script" uid="uid://dliq6pgdybvdm" path="res://scripts/tile_breaker.gd" id="1_rxq7w"]
+[ext_resource type="Texture2D" uid="uid://cckvo03cmfc1o" path="res://assets/Placeholders/WonderlandGrassPlaceholder.png" id="2_npk8w"]
+[ext_resource type="AudioStream" uid="uid://c0grfrchpyl6" path="res://assets/Original/630594__vinni_r__bone-break_5.wav" id="3_npk8w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjaea"]
+atlas = ExtResource("2_npk8w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apxx0"]
+size = Vector2(32, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaea"]
+size = Vector2(40, 32)
+
+[node name="TileBreaker" type="Area2D" unique_id=943883581]
+script = ExtResource("1_rxq7w")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=154299704]
+texture = SubResource("AtlasTexture_hjaea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1219656132]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_apxx0")
+
+[node name="630594VinniRBoneBreak5" type="AudioStreamPlayer" parent="." unique_id=1959697097]
+stream = ExtResource("3_npk8w")
+volume_db = 2.0
+
+[node name="DashCollider" type="Area2D" parent="." unique_id=1814009535]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashCollider" unique_id=287540741]
+shape = SubResource("RectangleShape2D_hjaea")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="DashCollider" to="." method="_on_dash_collider_body_entered"]
