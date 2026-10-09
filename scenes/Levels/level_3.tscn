@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bjk182e4pto30" path="res://scenes/Puzzle Objects/tile_breaker.tscn" id="7_wqrpq"]
 [ext_resource type="PackedScene" uid="uid://bbmixkr6udf3m" path="res://scenes/Puzzle Objects/door.tscn" id="8_r15cd"]
 [ext_resource type="Texture2D" uid="uid://b67bbh158ff6x" path="res://assets/Placeholders/wonderland_elevator.png" id="10_r4pos"]
+[ext_resource type="AudioStream" uid="uid://jmbg62ycgafj" path="res://assets/Original/529951__beetlemuse__ding-penguin-snow-globe-game.wav" id="11_idx6k"]
+[ext_resource type="AudioStream" uid="uid://rvwu52c2fq1t" path="res://assets/Original/684796__iainmccurdy__ding-air-fryer.wav" id="12_ld14n"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hjaea"]
 
@@ -154,6 +156,12 @@ tile_width = 2
 z_index = 1
 position = Vector2(184, 100)
 texture = ExtResource("10_r4pos")
+
+[node name="529951BeetlemuseDingPenguinSnowGlobeGame" type="AudioStreamPlayer" parent="." unique_id=1099865546]
+stream = ExtResource("11_idx6k")
+
+[node name="684796IainmccurdyDingAirFryer" type="AudioStreamPlayer" parent="." unique_id=311677080]
+stream = ExtResource("12_ld14n")
 
 [connection signal="body_entered" from="Camera2D/CaptureTrigger" to="." method="_on_capture_trigger_body_entered"]
 [connection signal="body_entered" from="Triggers/TowerEnterTrigger" to="." method="_on_tower_enter_trigger_body_entered"]

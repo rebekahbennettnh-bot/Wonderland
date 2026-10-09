@@ -14,6 +14,8 @@ class_name Level3
 @onready var queen : NPC = $NPCs/Queen
 @onready var elevator : Sprite2D = $Elevator
 @onready var exit_trigger : Area2D = $Triggers/ExitTrigger
+@onready var collect_sound : AudioStreamPlayer = $"529951BeetlemuseDingPenguinSnowGlobeGame"
+@onready var complete_sound : AudioStreamPlayer = $"684796IainmccurdyDingAirFryer"
 var tower_floor : int = 0
 var tower_scrolling : bool
 var camera_following : bool = true
@@ -151,11 +153,14 @@ func start_tower_climb() -> void:
 	
 func collect_tart_piece() -> void:
 	pieces_collected += 1
+	collect_sound.play()
 	queen.dialogue_state = min(3 + pieces_collected, 8)
 	queen.interact()
 	update_tart_hud()
 	if pieces_collected == 3 && !top_generated:
 		generate_end()
+		await get_tree().create_timer(0.75).timeout
+		complete_sound.play()
 
 func update_tart_hud() -> void:
 	return
