@@ -136,7 +136,10 @@ func start_question() -> void:
 	quizgiver.dialogue_state = rand
 	player.movement_frozen = true
 	quizgiver.interact()
-	await get_tree().create_timer(5).timeout
+	#await get_tree().create_timer(5).timeout
+	while quizgiver.talking == true:
+		await get_tree().process_frame
+	quizgiver.interact()
 	quizgiver.interact()
 
 func give_powerup() -> void:

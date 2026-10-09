@@ -12,6 +12,7 @@ const JUMP_VELOCITY = -315.0
 @onready var top_right_wall_ray : RayCast2D = $TopRightWallRay
 @onready var powerup_icons : Array[TextureRect] = [$AbilitiesUI/AbilitiesRect/VBoxContainer/DoubleJumpIcon, $AbilitiesUI/AbilitiesRect/VBoxContainer/WallJumpIcon, $AbilitiesUI/AbilitiesRect/VBoxContainer/DashIcon]
 @onready var ability_rect : NinePatchRect = $AbilitiesUI/AbilitiesRect
+@onready var dash_sfx : AudioStreamPlayer = $DashSfxWonderland
 
 @export var wall_jump_enabled : bool = true
 var wall_jump_movement_timeout : bool = false
@@ -226,6 +227,7 @@ func handle_dash() -> void:
 			update_powerup_icons()
 		velocity.x = SPEED * DASH_MODIFIER * direction
 		is_dashing = true
+		dash_sfx.play()
 		dash_buffer = 0
 		await get_tree().create_timer(0.1).timeout
 		is_dashing = false
@@ -237,6 +239,7 @@ func handle_dash() -> void:
 			update_powerup_icons()
 		velocity.x = SPEED * DASH_MODIFIER * direction
 		is_dashing = true
+		dash_sfx.play()
 		dash_buffer = 0
 		air_dash_used = true
 		await get_tree().create_timer(0.1).timeout

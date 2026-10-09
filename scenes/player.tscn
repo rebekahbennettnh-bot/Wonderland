@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://10iqhbb8eeuf" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://topqrc5tjxnf" path="res://assets/Original/rabbitcharacterresize.png" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://cj1w2i8115yh8" path="res://assets/Original/dash_sfx_wonderland.mp3" id="3_fjrip"]
 [ext_resource type="Texture2D" uid="uid://ba72aq8tk70hb" path="res://assets/Placeholders/LightTextNineslice.png" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://bgdavd3c5xogg" path="res://assets/Placeholders/Wonderland Ability Icons Placeholder.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://dh22hweufsdry" path="res://assets/Placeholders/Wonderland Ability Icons Dark.png" id="4_tuyoq"]
@@ -185,6 +186,10 @@ collision_mask = 2
 position = Vector2(0, -15)
 target_position = Vector2(5, 0)
 collision_mask = 2
+
+[node name="DashSfxWonderland" type="AudioStreamPlayer" parent="." unique_id=1774393134]
+stream = ExtResource("3_fjrip")
+volume_db = 5.0
 
 [node name="AbilitiesUI" type="CanvasLayer" parent="." unique_id=2097764555]
 scale = Vector2(4, 4)

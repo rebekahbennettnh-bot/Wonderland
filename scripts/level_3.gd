@@ -23,7 +23,7 @@ var pieces_collected : int
 var top_generated : bool
 var top_y : int
 var suits_animation_timer : float = 0.5
-var tart_pity : int = 4
+var tart_pity : int = 3
 var elevator_active : bool
 var top_reached : bool
 
@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 			top_reached = true
 			tower_scrolling = false
 		else:
-			camera.position.y -= delta * 16 #delta * 24
+			camera.position.y -= delta * 12 #delta * 24 #delta * 16
 			if player.position.y - camera.position.y < -72:
 				camera.position.y = player.position.y + 72
 	else:
@@ -119,6 +119,13 @@ func capture_player() -> void:
 	camera.position = Vector2(0, 0)
 	tower_scrolling = false
 	player.position = Vector2(0, 72+24)
+	player.dash_count = 0
+	player.wall_jump_count = 0
+	player.double_jump_count = 0
+	player.dash_enabled = false
+	player.wall_jump_enabled = false
+	player.double_jump_enabled = false
+	player.update_powerup_icons()
 	await get_tree().create_timer(2).timeout
 	for cell : Vector2i in tower_map.get_used_cells():
 		if cell.y <= -21:

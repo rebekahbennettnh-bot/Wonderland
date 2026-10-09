@@ -47,6 +47,8 @@ func _ready() -> void:
 		nametag.text = "Cheshire Cat"
 		portrait_visible = true
 		textbox_ui.layer += 1
+		var interact_rectangle : RectangleShape2D = $Area2D/CollisionShape2D.shape
+		interact_rectangle.size.x = 32
 	elif character == CHARACTERS.LEVEL1_NARRATOR:
 		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
 		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
@@ -588,7 +590,8 @@ func dialogue_tree() -> String:
 			return "You really thought you would-\nW-wait, don't go up there! Guards, stop them!"
 		elif dialogue_state == 4:
 			#dialogue_state += 1
-			return "Don't touch that, that could be anyone's suspicious fragment of tart!"
+			#return "Don't touch that, that could be anyone's suspicious fragment of tart!"
+			return "Don't touch that, that suspicious fragment of tart could belong to anybody!"
 		elif dialogue_state == 5:
 			#dialogue_state += 1
 			return "Leave it alone!"
