@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://d3gd5wdmuljao"]
+
+[ext_resource type="Texture2D" uid="uid://c2rqj52tyh8b8" path="res://assets/Original/hatter_wonderland.png" id="1_5rgnv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rgnv"]
+atlas = ExtResource("1_5rgnv")
+region = Rect2(36, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvq5g"]
+atlas = ExtResource("1_5rgnv")
+region = Rect2(68, 0, 24, 24)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rgnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvq5g")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}]

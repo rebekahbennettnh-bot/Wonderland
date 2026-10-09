@@ -16,13 +16,15 @@ var player_intersecting : bool
 var dialogue_state : int = 0
 var talking : bool
 var portrait_visible : bool
-enum CHARACTERS {SILPH, GELI, TUTORIAL_NARRATOR, CHESHIRE_CAT, LEVEL1_NARRATOR, MAD_HATTER, DORMOUSE, LEVEL2_NARRATOR, CARD_GUARD, QUEEN_OF_HEARTS, LEVEL3_NARRATOR}
+enum CHARACTERS {SILPH, GELI, TUTORIAL_NARRATOR, CHESHIRE_CAT, LEVEL1_NARRATOR, MAD_HATTER, HATTER_QUIZGIVER, DORMOUSE, LEVEL2_NARRATOR, CARD_GUARD, QUEEN_OF_HEARTS, LEVEL3_NARRATOR}
 var narrator_tracker : int
 var can_interact : bool = true
+var cheshire_alt : bool
 
 func _ready() -> void:
 	var root_reference : RootNode = get_tree().current_scene
 	narrator_tracker = root_reference.narrator_tracker
+	cheshire_alt = root_reference.cheshire_alt
 	textbox_ui.hide()
 	if character == CHARACTERS.SILPH:
 		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
@@ -40,8 +42,8 @@ func _ready() -> void:
 		nametag.text = ""
 		portrait_visible = false
 	elif character == CHARACTERS.CHESHIRE_CAT:
-		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
-		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
+		sprite.sprite_frames = preload("res://assets/Resources/cheshire_spriteframe.tres")
+		portrait.sprite_frames = preload("res://assets/Resources/cheshire_portrait_spriteframe.tres")
 		nametag.text = "Cheshire Cat"
 		portrait_visible = true
 		textbox_ui.layer += 1
@@ -51,8 +53,13 @@ func _ready() -> void:
 		nametag.text = ""
 		portrait_visible = false
 	elif character == CHARACTERS.MAD_HATTER:
+		sprite.sprite_frames = preload("res://assets/Resources/hatter_spriteframe.tres")
+		portrait.sprite_frames = preload("res://assets/Resources/hatter_portrait_spriteframe.tres")
+		nametag.text = "Mad Hatter"
+		portrait_visible = true
+	elif character == CHARACTERS.HATTER_QUIZGIVER:
 		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
-		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
+		portrait.sprite_frames = preload("res://assets/Resources/hatter_portrait_spriteframe.tres")
 		nametag.text = "Mad Hatter"
 		portrait_visible = true
 	elif character == CHARACTERS.DORMOUSE:
@@ -71,8 +78,8 @@ func _ready() -> void:
 		nametag.text = "Card Guard"
 		portrait_visible = true
 	elif character == CHARACTERS.QUEEN_OF_HEARTS:
-		sprite.sprite_frames = preload("res://assets/Resources/placeholder_spriteframe.tres")
-		portrait.sprite_frames = preload("res://assets/Resources/placeholder_portrait_spriteframe.tres")
+		sprite.sprite_frames = preload("res://assets/Resources/queen_spriteframe.tres")
+		portrait.sprite_frames = preload("res://assets/Resources/queen_portrait_spriteframe.tres")
 		nametag.text = "Queen of Hearts"
 		portrait_visible = true
 	elif character == CHARACTERS.LEVEL3_NARRATOR:
@@ -233,21 +240,43 @@ func dialogue_tree() -> String:
 			return "Now, if you want to pass, I need a favor in turn. Come a little further and help me find my head. I'll be waiting for you..."
 		elif dialogue_state == 4:
 			dialogue_state += 1
-			return "You've made it. Now, I need your help to find my head."
+			if cheshire_alt:
+				return "You've made it. Now, I need your help to find my head."
+			else:
+				return "You've made it. Now, I need your help to find my head. I worry the Queen wants it, so it's good to keep a spare."
 		elif dialogue_state == 5:
 			dialogue_state += 1
-			return "I worry the Queen wants it, so it's good to keep a spare. It should be just behind those striped blocks."
+			if cheshire_alt:
+				return "I worry the Queen wants it, so it's good to keep a spare. It should be just behind those striped blocks."
+			else:
+				return "You could make one out of some blue-striped tiles. They are fragile, so jump on them or dash into them to break them!"
 		elif dialogue_state == 6:
 			dialogue_state += 1
-			return "Pull all nine levers and then I'll let you through.\nHop to it, rabbit!"
+			if cheshire_alt:
+				dialogue_state += 1
+				return "Pull all nine levers and then I'll let you through.\nHop to it, rabbit!"
+			else:
+				return "Pull the levers to make them appear in front of the face, then break the ones in front of the red."
 		elif dialogue_state == 7:
-			return "You still haven't pulled all the levers."
+			dialogue_state += 1
+			return "Go clockwise from here, to build from the bottom up. Talk to me when you are done."
 		elif dialogue_state == 8:
+			var room_ref : Level1 = get_parent().get_parent()
+			if cheshire_alt:
+				return "You still haven't pulled all the levers."
+			elif room_ref.face_complete():
+				var level_ref : Level1 = get_parent().get_parent()
+				level_ref.signal_bus.broadcast_logic_update.emit(10, true)
+				dialogue_state = 10
+				return "Nicely done, it looks just like me. I'll let you through now."
+			else:
+				return "That head isn't right! It should like like this picture, like me!"
+		elif dialogue_state == 9:
 			dialogue_state += 1
 			var level_ref : Level1 = get_parent().get_parent()
 			level_ref.signal_bus.broadcast_logic_update.emit(10, true)
 			return "Nicely done, it looks just like me. I'll let you through now."
-		elif dialogue_state == 9:
+		elif dialogue_state == 10:
 			return "Best of luck up ahead. I don't fancy the Queen will let you past again."
 	elif character == CHARACTERS.LEVEL1_NARRATOR:
 		if dialogue_state == 0:
@@ -309,18 +338,119 @@ func dialogue_tree() -> String:
 			return "You seemed in such a hurry before. This time, you MUST do us the honor of staying for tea."
 		elif dialogue_state == 2:
 			dialogue_state = 4
-			return "Now, stay in that chair and enjoy your tea. It wouldn't do to let it get cold."
+			return "Now, stay over there and enjoy your tea. It wouldn't do to let it get cold."
 		elif dialogue_state == 3:
 			return "What are you doing? Get back to your seat."
 		elif dialogue_state == 4:
-			return "Why are you here? Unless you have something for me, get back to your seat."
-		elif dialogue_state == 5:
+			var level_ref : Level2 = get_parent().get_parent()
+			if level_ref.has_cake:
+				level_ref.hatter_grow()
+				can_interact = false
+				return "Some cake to go with the tea? What a fantastic idea! I knew you liked the tea party."
+			else:
+				level_ref.player_freeze_sendback()
+				return "Why are you here? Unless you have something for me, get back to your seat."
+		elif dialogue_state == -1:
+			return ""
+		#elif dialogue_state == 5:
+			#dialogue_state += 1
+			#return "A cake? For me...?\nHow insensitive!"
+		#elif dialogue_state == 6:
+			#return "You need some for the Dormouse and yourself as well. This is a tea party, I won't eat while the guests go hungry. Now, back to your seat!"
+		#elif dialogue_state == 7:
+			#return "Cakes to go with the tea? What a fantastic idea! I'll eat all three, I assume you have your own."
+	elif character == CHARACTERS.HATTER_QUIZGIVER:
+		if dialogue_state == 10:
 			dialogue_state += 1
-			return "A cake? For me...?\nHow insensitive!"
-		elif dialogue_state == 6:
-			return "You need some for the Dormouse and yourself as well. This is a tea party, I won't eat while the guests go hungry. Now, back to your seat!"
-		elif dialogue_state == 7:
-			return "Cakes to go with the tea? What a fantastic idea! I'll eat all three, I assume you have your own."
+			return "A question for you: If all dormice are always asleep, then the Dormouse must be sleeping right now, yes?"
+		elif dialogue_state == 11:
+			var choice1 = func():
+				self.dialogue_state = 12
+				self.interact()
+			var choice2 = func():
+				self.dialogue_state = 13
+				self.interact()
+			prompt_choice(PackedStringArray(["Yes.", "No."]), [choice1, choice2])
+		elif dialogue_state == 12:
+			dialogue_state = 4
+			var level_ref : Level2 = get_parent().get_parent()
+			level_ref.question_active = false
+			if level_ref.dormouse2.sprite.animation == "sleeping":
+				level_ref.give_powerup()
+				return "Well of course! Dormouse, wake up and give them a prize."
+			else:
+				return "But they're wide awake!"
+		elif dialogue_state == 13:
+			dialogue_state = 4
+			var level_ref : Level2 = get_parent().get_parent()
+			level_ref.question_active = false
+			if level_ref.dormouse2.sprite.animation == "sleeping":
+				return "But they're sound asleep!"
+			else:
+				level_ref.give_powerup()
+				return "Well of course! Dormouse, give them a prize."
+		elif dialogue_state == 20:
+			dialogue_state += 1
+			return "A question for you: Because this is a tea party, everyone must sit in their own seats. Are you in yours?"
+		elif dialogue_state == 21:
+			var choice1 = func():
+				self.dialogue_state = 22
+				self.interact()
+			var choice2 = func():
+				self.dialogue_state = 23
+				self.interact()
+			prompt_choice(PackedStringArray(["Yes.", "No."]), [choice1, choice2])
+		elif dialogue_state == 22:
+			dialogue_state = 4
+			var level_ref : Level2 = get_parent().get_parent()
+			level_ref.question_active = false
+			return "Good, good. Enjoy the tea!"
+		elif dialogue_state == 23:
+			dialogue_state = 4
+			var level_ref : Level2 = get_parent().get_parent()
+			level_ref.question_active = false
+			level_ref.give_powerup()
+			level_ref.player_freeze_sendback()
+			return "Why have you left it? Well, a prize for honesty, at least."
+		elif dialogue_state == 30:
+			dialogue_state += 1
+			return "A question for you: Since this is a tea party, what time is it?"
+		elif dialogue_state == 31:
+			var choice1 = func():
+				self.dialogue_state = 32
+				self.interact()
+			var choice2 = func():
+				self.dialogue_state = 33
+				self.interact()
+			var choice3 = func():
+				self.dialogue_state = 34
+				self.interact()
+			var time_string : String = Time.get_time_string_from_system(false)
+			prompt_choice(PackedStringArray(["Tea time.", "6:00.", time_string.substr(0, 5)]), [choice1, choice2, choice3])
+		elif dialogue_state == 32:
+			dialogue_state = 4
+			var level_ref : Level2 = get_parent().get_parent()
+			level_ref.question_active = false
+			return "That's obvious! No prize for such a simple answer."
+		elif dialogue_state == 33:
+			dialogue_state = 4
+			var level_ref : Level2 = get_parent().get_parent()
+			level_ref.question_active = false
+			level_ref.player_freeze_sendback()
+			return "What, are you taking Time's side in the matter? Get back to your seat!"
+		elif dialogue_state == 34:
+			dialogue_state = 4
+			var level_ref : Level2 = get_parent().get_parent()
+			level_ref.question_active = false
+			level_ref.give_powerup()
+			return "Precisely! I knew rabbits were good at keeping track of time."
+		#elif dialogue_state == 5:
+			#dialogue_state += 1
+			#return "A cake? For me...?\nHow insensitive!"
+		#elif dialogue_state == 6:
+			#return "You need some for the Dormouse and yourself as well. This is a tea party, I won't eat while the guests go hungry. Now, back to your seat!"
+		#elif dialogue_state == 7:
+			#return "Cakes to go with the tea? What a fantastic idea! I'll eat all three, I assume you have your own."
 	elif character == CHARACTERS.DORMOUSE:
 		if dialogue_state == 0:
 			dialogue_state += 1
@@ -343,15 +473,23 @@ func dialogue_tree() -> String:
 			return "Zzzzz...\nHello again. I assume you met the Hatter? He can be rather insistent."
 		elif dialogue_state == 5:
 			dialogue_state += 1
-			return "If you want to keep going, you should do us both a favor and deal with him. I'd prefer to sleep without being used as a cushion or dunked in tea."
+			sprite.play("idle")
+			portrait.play("idle")
+			return "If you want to keep going, you should do us both a favor and deal with him. I'd prefer to sleep without being dunked in tea."
 		elif dialogue_state == 6:
 			dialogue_state += 1
 			#return "Like the potions that shrink you, there are some cakes around that make you huge. I'll bet if you gave one to the Hatter, he would be too big to even notice us leave."
+			sprite.play("idle")
+			portrait.play("idle")
 			return "There are some cakes around that make you grow huge. I'll bet if you gave one to the Hatter, he would be too big to even notice us leave."
 		elif dialogue_state == 7:
 			dialogue_state += 1
+			sprite.play("idle")
+			portrait.play("idle")
 			return "He likes riddles, too, so I'll bet he won't mind if I give you a prize if you answer correctly."
 		elif dialogue_state == 8:
+			sprite.play("idle")
+			portrait.play("idle")
 			return "Now, go distract him and quit interrupting my naps."
 	elif character == CHARACTERS.LEVEL2_NARRATOR:
 		#if dialogue_state == 0:
@@ -401,7 +539,8 @@ func dialogue_tree() -> String:
 			return "You see, I've had an idea. The fact that you keep finding me suggests you want to get all you can out of this game, right?"
 		elif dialogue_state == 11:
 			dialogue_state += 1
-			return "Well, what if I were to help you try something new?\nWaiting around to say one line of narration gets boring, so I've been working on a side project."
+			return "Well, I was poking around and discovered a more difficult version of the first level. There seemed to be plans for more, as well, but it seems to have been scrapped."
+			#return "Well, what if I were to help you try something new?\nWaiting around to say one line of narration gets boring, so I've been working on a side project."
 		elif dialogue_state == 11:
 			dialogue_state += 1
 			return "If you can find me in the next stage, I'll let you test it out.\nNow, you know the drill - I can return you to the level if you want."
@@ -422,7 +561,8 @@ func dialogue_tree() -> String:
 			dialogue_state = 11
 			#var root_node : RootNode = get_tree().current_scene
 			#root_node.narrator_tracker = 2
-			return "I guess so, since I really do hope you succeed. I'll not be far from where you begin, so don't be afraid of backtracking."
+			#return "I guess so, since I really do hope you succeed. I'll not be far from where you begin, so don't be afraid of backtracking."
+			return "On second thought, I probably won't be there. Scope and crunch and all have rendered my story incomplete."
 	elif character == CHARACTERS.CARD_GUARD:
 		if dialogue_state == 0:
 			dialogue_state += 1
@@ -432,9 +572,62 @@ func dialogue_tree() -> String:
 	elif character == CHARACTERS.QUEEN_OF_HEARTS:
 		if dialogue_state == 0:
 			dialogue_state += 1
-			return "..."
+			return "You again! Don't think you can just leave like before, Wonderland needs its White Rabbit."
 		elif dialogue_state == 1:
-			return "...(The figure stays silent.)"
+			dialogue_state += 1
+			return "The most direct course of action would be to keep you in the dungeon. Thus, you are hereby accused of... stealing a tart!"
+		elif dialogue_state == 2:
+			dialogue_state += 1
+			var level_ref : Level3 = get_parent().get_parent()
+			level_ref.queen_to_elevator()
+			return "Without any evidence, it's your word against mine, and I'm the queen. Now, stay here while I fetch the guards."
+		elif dialogue_state == 3:
+			dialogue_state += 1
+			var level_ref : Level3 = get_parent().get_parent()
+			level_ref.start_tower_climb()
+			return "You really thought you would-\nW-wait, don't go up there! Guards, stop them!"
+		elif dialogue_state == 4:
+			#dialogue_state += 1
+			return "Don't touch that, that could be anyone's suspicious fragment of tart!"
+		elif dialogue_state == 5:
+			#dialogue_state += 1
+			return "Leave it alone!"
+		elif dialogue_state == 6:
+			#dialogue_state += 1
+			return "It's not proof of anything!"
+		elif dialogue_state == 7:
+			#dialogue_state += 1
+			return "One part is still missing, maybe you stole it!"
+		elif dialogue_state == 8:
+			#dialogue_state += 1
+			return "Just stop running!"
+		elif dialogue_state == 9:
+			dialogue_state += 1
+			return "I can still have you captured. My word against yours, remember?"
+		elif dialogue_state == 10:
+			var choice1 = func():
+				self.dialogue_state = 11
+				self.interact()
+			var choice2 = func():
+				self.dialogue_state = 11
+				self.interact()
+			prompt_choice(PackedStringArray(["But I have evidence! The tart was all in your tower, you stole it!", "Your guards can't catch me anyway, now let me go!"]), [choice1, choice2])
+		elif dialogue_state == 11:
+			dialogue_state += 1
+			return "That could be true, but why do you want to leave so bad anyway? You can be and do so much more here in Wonderland."
+		elif dialogue_state == 12:
+			var choice1 = func():
+				self.dialogue_state = 13
+				self.interact()
+			var choice2 = func():
+				self.dialogue_state = 13
+				self.interact()
+			prompt_choice(PackedStringArray(["I met friends on the surface.", "This isn't where I belong anymore."]), [choice1, choice2])
+		elif dialogue_state == 13:
+			dialogue_state += 1
+			var level_ref : Level3 = get_parent().get_parent()
+			level_ref.end_free_camera()
+			return "Fine, just go.\nI'll bet you can't make it up there anyway.\nAnd if you do, don't come back."
 	elif character == CHARACTERS.LEVEL3_NARRATOR:
 		if dialogue_state == 0:
 			dialogue_state += 1
@@ -477,13 +670,13 @@ func dialogue_tree() -> String:
 			return "..."
 		elif dialogue_state == 10:
 			dialogue_state += 1
-			return "So, about the secret project.\nWell, you've really pushed the platformer to its limits, so my thought was to introduce another genre."
+			return "So, about that version of the first level."
 		elif dialogue_state == 11:
 			dialogue_state += 1
 			return "When you get back to the top of the tower - I can send you there once we finish talking - the gate on the left will be open."
 		elif dialogue_state == 12:
 			dialogue_state += 1
-			return "Now, I'm not one to spoil the surprise, but nor will I let you go unprepared. Take this vorpal sword, and remember: Beware the Jabberwock, my friend!"
+			return "If you go through, I've rigged a gate to take you to the harder level. If you don't want to do it, just avoid the gate."
 		elif dialogue_state == 13:
 			var root_node : RootNode = get_tree().current_scene
 			root_node.narrator_tracker = 4
@@ -496,22 +689,88 @@ func dialogue_tree() -> String:
 			var choice3 = func():
 				print("Empty choice picked.")
 			#dialogue_state -= 1
-			prompt_choice(PackedStringArray(["You're sending me into danger?", "Alright, take me to the top.", "I can climb back up."]), [choice1, choice2, choice3])
+			prompt_choice(PackedStringArray(["What was the other scrapped content you mentioned?", "Alright, take me to the top.", "I can climb back up."]), [choice1, choice2, choice3])
 		elif dialogue_state == 14:
 			dialogue_state = 13
 			#var root_node : RootNode = get_tree().current_scene
 			#root_node.narrator_tracker = 2
-			return "Don't worry, you'll respawn at the top of the tower if anything goes wrong. Now, should I teleport you?"
-		elif dialogue_state == 15:
-			return "Okay, I realize I never taught you how to use that sword. I suppose it's time for a bit more narration."
-		elif dialogue_state == 16:
-			return "Use ENTER or LEFT CLICK to swing the vorpal sword."
-		elif dialogue_state == 17:
-			return "Swing just before you get hit to parry."
-		elif dialogue_state == 18:
-			return "You will lose a powerup when hit. If hit without powerups, you die and respawn."
-		elif dialogue_state == 19:
-			return "As the Jabberwock's health lowers, it will retreat towards to the surface. Stop it before it escapes Wonderland!"
+			return "It seemed like there would have been a hidden boss battle against something called the Jabberwock, but almost nothing is left of it. Now, should I teleport you?"
+		#if dialogue_state == 0:
+			#dialogue_state += 1
+			#return "Press E to interact with characters and levers."
+		#elif dialogue_state == 1:
+			#if narrator_tracker == 0:
+				#dialogue_state += 1
+				#return "Oh...\nHello there."
+			#elif narrator_tracker == 1 || narrator_tracker == 2:
+				#dialogue_state = 6
+				#return "Oh...\nHello again."
+			#else:
+				#dialogue_state = 10
+				#return "Oh, hello!\nYou made it!"
+		#elif dialogue_state == 2:
+			#dialogue_state += 1
+			#return "I'm the narrator. You aren't supposed to be in here. All I do here is teach you about the tower."
+		#elif dialogue_state == 3:
+			#dialogue_state += 1
+			#return "Every textbox has to come from somewhere, of course. Why not make it diagetic?"
+		#if dialogue_state == 4:
+			#dialogue_state += 1
+			#return "I'm sorry, perhaps if we had met earlier, I might have more to say to you. For now, though, the only thing to do is return to the level."
+		#elif dialogue_state == 5:
+			#var root_node : RootNode = get_tree().current_scene
+			#root_node.narrator_tracker = 1
+			#return "..."
+		#elif dialogue_state == 6:
+			#dialogue_state += 1
+			#return "You've found me again. I'm just here to teach you about the tower."
+		#elif dialogue_state == 7:
+			#dialogue_state += 1
+			#return "Look, I apologize, but there is really nothing I can do for you right now."
+		#elif dialogue_state == 8:
+			#dialogue_state += 1
+			#return "If I had met you back in the tutorial, I might have an idea, but the way things have gone, I'm just not feeling inspired."
+		#elif dialogue_state == 9:
+			#var root_node : RootNode = get_tree().current_scene
+			#root_node.narrator_tracker = 2
+			#return "..."
+		#elif dialogue_state == 10:
+			#dialogue_state += 1
+			#return "So, about the secret project.\nWell, you've really pushed the platformer to its limits, so my thought was to introduce another genre."
+		#elif dialogue_state == 11:
+			#dialogue_state += 1
+			#return "When you get back to the top of the tower - I can send you there once we finish talking - the gate on the left will be open."
+		#elif dialogue_state == 12:
+			#dialogue_state += 1
+			#return "Now, I'm not one to spoil the surprise, but nor will I let you go unprepared. Take this vorpal sword, and remember: Beware the Jabberwock, my friend!"
+		#elif dialogue_state == 13:
+			#var root_node : RootNode = get_tree().current_scene
+			#root_node.narrator_tracker = 4
+			#var choice1 = func():
+				#self.dialogue_state = 14
+				#self.interact()
+			#var choice2 = func():
+				#var player_ref : PlayerController = get_parent().get_parent().get_node("Player")
+				#player_ref.position = Vector2(0, -208)
+			#var choice3 = func():
+				#print("Empty choice picked.")
+			##dialogue_state -= 1
+			#prompt_choice(PackedStringArray(["You're sending me into danger?", "Alright, take me to the top.", "I can climb back up."]), [choice1, choice2, choice3])
+		#elif dialogue_state == 14:
+			#dialogue_state = 13
+			##var root_node : RootNode = get_tree().current_scene
+			##root_node.narrator_tracker = 2
+			#return "Don't worry, you'll respawn at the top of the tower if anything goes wrong. Now, should I teleport you?"
+		#elif dialogue_state == 15:
+			#return "Okay, I realize I never taught you how to use that sword. I suppose it's time for a bit more narration."
+		#elif dialogue_state == 16:
+			#return "Use ENTER or LEFT CLICK to swing the vorpal sword."
+		#elif dialogue_state == 17:
+			#return "Swing just before you get hit to parry."
+		#elif dialogue_state == 18:
+			#return "You will lose a powerup when hit. If hit without powerups, you die and respawn."
+		#elif dialogue_state == 19:
+			#return "As the Jabberwock's health lowers, it will retreat towards to the surface. Stop it before it escapes Wonderland!"
 	return ""
 	
 func prompt_choice(choices : PackedStringArray, outcomes : Array[Callable]) -> void:

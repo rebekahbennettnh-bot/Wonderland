@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://26dmq8hnispx"]
+
+[ext_resource type="Texture2D" uid="uid://dqy7kfr8qqbsx" path="res://assets/Original/cheshire_cat_wonderland.png" id="1_sym7j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sym7j"]
+atlas = ExtResource("1_sym7j")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48tyc"]
+atlas = ExtResource("1_sym7j")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyqct"]
+atlas = ExtResource("1_sym7j")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j22sd"]
+atlas = ExtResource("1_sym7j")
+region = Rect2(48, 32, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sym7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48tyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyqct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j22sd")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}]

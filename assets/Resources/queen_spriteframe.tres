@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://rh2rhjv1t1la"]
+
+[ext_resource type="Texture2D" uid="uid://7y3b7ijpmaud" path="res://assets/Original/queen_wonderland.png" id="1_hm044"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ciwee"]
+atlas = ExtResource("1_hm044")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y41vg"]
+atlas = ExtResource("1_hm044")
+region = Rect2(0, 32, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ciwee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y41vg")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}]

@@ -39,6 +39,6 @@ func interact() -> void:
 func update_sprite() -> void:
 	sprite.region_enabled = true
 	if toggled:
-		sprite.region_rect = Rect2(32, 0, 32, 32)
-	else:
 		sprite.region_rect = Rect2(0, 0, 32, 32)
+	else:
+		sprite.region_rect = Rect2(0, 32, 32, 32)

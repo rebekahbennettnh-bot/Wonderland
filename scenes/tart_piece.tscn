@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bjks8hjm4i26o"]
+
+[ext_resource type="Script" uid="uid://d2v74rvq2kb41" path="res://scripts/tart_piece.gd" id="1_onco1"]
+[ext_resource type="Texture2D" uid="uid://b2lroui644fqw" path="res://assets/Original/wonderland_tart.png" id="2_tuts0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8vsy1"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4g7g"]
+atlas = ExtResource("2_tuts0")
+
+[node name="TartPiece" type="Area2D" unique_id=1828292569]
+collision_layer = 8
+script = ExtResource("1_onco1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1420538020]
+shape = SubResource("CircleShape2D_8vsy1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1561304452]
+texture = SubResource("AtlasTexture_t4g7g")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

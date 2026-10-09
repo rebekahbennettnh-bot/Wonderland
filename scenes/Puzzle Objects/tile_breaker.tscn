@@ -9,9 +9,11 @@ atlas = ExtResource("2_npk8w")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_apxx0"]
+resource_local_to_scene = true
 size = Vector2(32, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaea"]
+resource_local_to_scene = true
 size = Vector2(40, 32)
 
 [node name="TileBreaker" type="Area2D" unique_id=943883581]

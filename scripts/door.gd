@@ -1,4 +1,5 @@
 extends AnimatableBody2D
+class_name Door
 
 @export var logic_channel : int
 @export var inverted : bool
@@ -16,10 +17,12 @@ class Tile:
 		atlas_coords = p_atlas_coords
 		source_id = p_source_id
 
-@onready var signal_bus : SignalBus = %SignalBus
+#@onready var signal_bus : SignalBus = %SignalBus
+var signal_bus : SignalBus
 
 func _ready() -> void:
 	visible = false
+	signal_bus = get_parent().get_parent().get_node("SignalBus")
 	signal_bus.broadcast_logic_update.connect(update_logic)
 	tilemap_reference = get_parent().get_parent().get_node("TileMapLayer")
 	@warning_ignore_start("narrowing_conversion")

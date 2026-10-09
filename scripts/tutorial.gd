@@ -60,3 +60,12 @@ func _on_secret_exit_trigger_body_entered(body: Node2D) -> void:
 				tutorial_music.stop()
 		var root : RootNode = get_tree().current_scene
 		root.start_test_plane()
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("secret_win_button"):
+		if get_tree().current_scene.get_node("TutorialMusic").playing:
+			var tutorial_music : AudioStreamPlayer = get_tree().current_scene.get_node("TutorialMusic")
+			if tutorial_music != null:
+				tutorial_music.stop()
+		var root : RootNode = get_tree().current_scene
+		root.start_level_1()

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://c37sp6tch8b0w" path="res://scripts/root_node.gd" id="1_ynfbw"]
 [ext_resource type="AudioStream" uid="uid://js3e1ak5cxvr" path="res://assets/Original/tutorial level.wav" id="2_d22p1"]
 [ext_resource type="AudioStream" uid="uid://ck556d51dqapp" path="res://assets/Original/level1.wav" id="3_j58tw"]
+[ext_resource type="AudioStream" uid="uid://w80suwwwiq6j" path="res://assets/Original/mad hatter.wav" id="4_ecw48"]
+[ext_resource type="AudioStream" uid="uid://bw6swdy6gt1o6" path="res://assets/Original/queen of hearts music.wav" id="5_je614"]
 
 [node name="Root Node" type="Node2D" unique_id=803388301]
 script = ExtResource("1_ynfbw")
@@ -12,3 +14,9 @@ stream = ExtResource("2_d22p1")
 
 [node name="Level1Music" type="AudioStreamPlayer" parent="." unique_id=511654025]
 stream = ExtResource("3_j58tw")
+
+[node name="Level2Music" type="AudioStreamPlayer" parent="." unique_id=1765304738]
+stream = ExtResource("4_ecw48")
+
+[node name="Level3Music" type="AudioStreamPlayer" parent="." unique_id=1016272961]
+stream = ExtResource("5_je614")

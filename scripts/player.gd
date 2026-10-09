@@ -37,6 +37,7 @@ var hangtime_active : bool
 var gravity_modifier : float = 1.0
 
 var old_y : float
+var menu_coundown : float = 3.0
 
 func _ready() -> void:
 	if wall_jump_enabled:
@@ -51,8 +52,18 @@ func _ready() -> void:
 	update_powerup_icons()
 	
 func _physics_process(delta: float) -> void:
+	if Input.is_action_pressed("menu_return"):
+		menu_coundown -= delta
+		if menu_coundown <= 0:
+			var root_ref : RootNode = get_tree().current_scene
+			root_ref.start_menu()
+	else:
+		menu_coundown = 3.0
+	
 	old_y = velocity.y
 	if movement_frozen:
+		if sprite.animation != "idle":
+			sprite.play("idle")
 		return
 	
 	if (velocity.y < -1 && velocity.y > -20 && !hangtime_active):

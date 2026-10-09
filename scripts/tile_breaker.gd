@@ -1,10 +1,12 @@
 extends Area2D
+class_name TileBreaker
 
 @export var max_hp : int = 2
 @export var logic_channel : int
 @export var inverted : bool
 @export var tile_height : int = 2
 @export var tile_width : int = 2
+@export var dont_break_to_win : bool
 var hp : int
 var jumped_on_timeout : bool
 var tilemap_reference : TileMapLayer
@@ -22,23 +24,23 @@ class Tile:
 @onready var sound : AudioStreamPlayer = $"630594VinniRBoneBreak5"
 @onready var collider : CollisionShape2D = $CollisionShape2D
 @onready var dash_collider : CollisionShape2D = $DashCollider/CollisionShape2D
+@onready var sprite : Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	hp = max_hp
-	var shape : RectangleShape2D = collider.shape
-	shape.size.x = 16*tile_width
-	var dash_shape : RectangleShape2D = dash_collider.shape
-	dash_shape.size = Vector2((16*tile_width) + 6, 16*tile_height)
-	visible = false
+	collider.shape.set_size(Vector2(16*tile_width, 6))
+	dash_collider.shape.set_size(Vector2((16*tile_width) + 6, 16*tile_height))
+	sprite.visible = false
 	signal_bus.broadcast_logic_update.connect(update_logic)
 	tilemap_reference = get_parent().get_parent().get_node("TileMapLayer")
 	@warning_ignore_start("narrowing_conversion")
 	var map_coords : Vector2i = Vector2i(((position.x-(8*(tile_width-1))) / 16), (position.y-8) / 16)
 	@warning_ignore_restore("narrowing_conversion")
-	if position.x < 0:
+	if position.x <= 0:
 		map_coords.x -= 1
-	if position.y < 0:
+	if position.y <= 0:
 		map_coords.y -= 1
+	
 	for x : int in tile_width:
 		for y : int in tile_height:
 			overlapped_tile_list.append(Tile.new(Vector2i(map_coords.x + x, map_coords.y + y), tilemap_reference.get_cell_atlas_coords(Vector2i(map_coords.x + x, map_coords.y + y)), tilemap_reference.get_cell_source_id(Vector2i(map_coords.x + x, map_coords.y + y))))
@@ -81,7 +83,7 @@ func get_jumped_on() -> void:
 		sound.play()
 		affect_overlapping_tiles()
 		jumped_on_timeout = true
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.1).timeout
 		jumped_on_timeout = false
 
 
